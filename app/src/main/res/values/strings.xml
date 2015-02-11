@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">WebRegistration</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="parse_app_id">jE3IqT9f5sNqSSwjaszG4HA8avme1PeNWM2hDzcl</string>
+    <string name="parse_client_key">PoG8n50wWC5e9g3bAjAZrlr46l89X0ONToNB22Nz</string>
+    <string name="facebook_app_id">393627314138219</string>
+
+</resources>
