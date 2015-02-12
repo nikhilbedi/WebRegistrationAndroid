@@ -24,7 +24,7 @@ public class SplashActivity extends Activity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        ParseAnalytics.trackAppOpened(getIntent());
+        //ParseAnalytics.trackAppOpened(getIntent());
         try {
             if(ParseUser.getCurrentUser() != null) {
                 Thread.sleep(1000);
