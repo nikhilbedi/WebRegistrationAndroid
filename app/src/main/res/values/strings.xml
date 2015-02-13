@@ -9,4 +9,6 @@
     <string name="parse_client_key">PoG8n50wWC5e9g3bAjAZrlr46l89X0ONToNB22Nz</string>
     <string name="facebook_app_id">393627314138219</string>
 
+    <string name="logout">Logout</string>
+
 </resources>

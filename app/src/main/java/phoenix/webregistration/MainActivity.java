@@ -1,9 +1,15 @@
 package phoenix.webregistration;
 
 import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+
+import com.parse.ParseUser;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -13,9 +19,14 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        
-        // Testing commit via Android Studio
+        // log out button
+        Button logoutButton = (Button) findViewById(R.id.logout_button);
+        logoutButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout(v);
+            }
+        });
     }
 
 
@@ -40,5 +51,28 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * OnClick method for logging out.
+     */
+    public void logout(View v) {
+        ParseUser.logOut();
+        /*This session getting and clearing eliminates an issue:
+         User is logged in to facebook, logs in to App
+         User logs out of Sublime, logs out of Facebook (in either order)
+         User logs back into Sublime and bypasses facebook authentication because the session
+            wasn't cleared (this is the uss)
+            */
+        com.facebook.Session fbs = com.facebook.Session.getActiveSession();
+        if(fbs == null) {
+            fbs = new com.facebook.Session(this);
+            com.facebook.Session.setActiveSession(fbs);
+        }
+        fbs.closeAndClearTokenInformation();
+
+        Intent intent = new Intent(this, SplashActivity.class);
+
+        startActivity(intent);
     }
 }
