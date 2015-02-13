@@ -57,7 +57,7 @@ public class SplashActivity extends Activity
             }
             else {
                 ParseLoginBuilder builder = new ParseLoginBuilder(this);
-                Intent parseLoginIntent = builder.setFacebookLoginButtonText("Just login with Facebook")
+                Intent parseLoginIntent = builder.setFacebookLoginButtonText("Connect with Facebook")
                         .build();
                 startActivityForResult(parseLoginIntent, LOGIN_REQUEST);
             }

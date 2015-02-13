@@ -11,4 +11,10 @@
 
     <string name="logout">Logout</string>
 
+    <!-- Facebook -->
+    <string-array name="my_facebook_permissions">
+        <item>public_profile</item>
+        <item>user_friends</item>
+    </string-array>
+
 </resources>
