@@ -16,6 +16,8 @@ import org.json.JSONException;
  */
 public class NetworkManager {
 
+    public static final String SCHOOLS_URL = "http://petri.esd.usc.edu/socAPI/Schools/";
+
     private static String readAll(Reader rd) throws IOException {
         StringBuilder sb = new StringBuilder();
         int cp;
@@ -35,5 +37,11 @@ public class NetworkManager {
         } finally {
             is.close();
         }
+    }
+
+    public static void requestData(String url, NetworkListener listener) {
+        NetworkSyncTask schoolsTask = new NetworkSyncTask();
+        schoolsTask.setListener(listener);
+        schoolsTask.execute(url);
     }
 }

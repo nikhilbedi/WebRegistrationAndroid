@@ -13,13 +13,10 @@ import android.widget.Button;
 import com.parse.ParseUser;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.IOException;
-
+import phoenix.webregistration.network.NetworkListener;
 import phoenix.webregistration.network.NetworkManager;
-import phoenix.webregistration.network.RetrieveSchoolsTask;
+import phoenix.webregistration.network.NetworkSyncTask;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -38,10 +35,13 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        // Obtain info from network
-        RetrieveSchoolsTask schoolsTask = new RetrieveSchoolsTask();
-        schoolsTask.setListener(this);
-        schoolsTask.execute("http://petri.esd.usc.edu/socAPI/Schools/");
+        // Proper way to obtain info from network - Provided as example.
+        NetworkManager.requestData(NetworkManager.SCHOOLS_URL, new NetworkListener() {
+            @Override
+            public void onDataArrival(JSONArray jsonArray){
+                onSchoolInfoReturn(jsonArray);
+            }
+        });
 
     }
 

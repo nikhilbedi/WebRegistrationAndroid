@@ -14,11 +14,11 @@ import phoenix.webregistration.WebRegistrationApplication;
  * Created by Nikhil on 2/13/2015.
  */
 
-public class RetrieveSchoolsTask extends AsyncTask<String, Void, JSONArray> {
+public class NetworkSyncTask extends AsyncTask<String, Void, JSONArray> {
 
-    private MainActivity listener;
+    private NetworkListener listener;
 
-    public void setListener(MainActivity listener) {
+    public void setListener(NetworkListener listener) {
         this.listener = listener;
     }
 
@@ -39,7 +39,6 @@ public class RetrieveSchoolsTask extends AsyncTask<String, Void, JSONArray> {
     }
 
     protected void onPostExecute(JSONArray result) {
-        Log.d(WebRegistrationApplication.getTag(), "Finished API Request");
-        listener.onSchoolInfoReturn(result);
+        listener.onDataArrival(result);
     }
 }
