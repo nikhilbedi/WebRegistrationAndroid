@@ -12,8 +12,8 @@ import phoenix.webregistration.WebRegistrationApplication;
 
 /**
  * Created by Nikhil on 2/13/2015.
+ * Networking must be done on separate threads. This class is for that purpose.
  */
-
 public class NetworkSyncTask extends AsyncTask<String, Void, JSONArray> {
 
     private NetworkListener listener;

@@ -18,6 +18,9 @@ public class NetworkManager {
 
     public static final String SCHOOLS_URL = "http://petri.esd.usc.edu/socAPI/Schools/";
 
+    /*
+     * Creates a string from a reader.
+     */
     private static String readAll(Reader rd) throws IOException {
         StringBuilder sb = new StringBuilder();
         int cp;
@@ -27,6 +30,9 @@ public class NetworkManager {
         return sb.toString();
     }
 
+    /*
+     * Takes a URL and retrieves its JSON response in the form of an JSONArray.
+     */
     public static JSONArray readJSONFromURL(String url) throws IOException, JSONException {
         InputStream is = new URL(url).openStream();
         try {
@@ -39,9 +45,18 @@ public class NetworkManager {
         }
     }
 
+    /*
+     * A wrapper function for retrieving data asynchronously. Example usage:
+     * NetworkManager.requestData("url.com", new NetworkListener() {
+            @Override
+            public void onDataArrival(JSONArray jsonArray){
+                // Do Something with Data
+            }
+        });
+     */
     public static void requestData(String url, NetworkListener listener) {
-        NetworkSyncTask schoolsTask = new NetworkSyncTask();
-        schoolsTask.setListener(listener);
-        schoolsTask.execute(url);
+        NetworkSyncTask task = new NetworkSyncTask();
+        task.setListener(listener);
+        task.execute(url);
     }
 }
