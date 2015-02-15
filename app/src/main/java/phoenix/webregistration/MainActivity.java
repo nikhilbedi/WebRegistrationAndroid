@@ -3,6 +3,7 @@ package phoenix.webregistration;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,6 +11,15 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.parse.ParseUser;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import phoenix.webregistration.network.NetworkManager;
+import phoenix.webregistration.network.RetrieveSchoolsTask;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -27,6 +37,12 @@ public class MainActivity extends ActionBarActivity {
                 logout(v);
             }
         });
+
+        // Obtain info from network
+        RetrieveSchoolsTask schoolsTask = new RetrieveSchoolsTask();
+        schoolsTask.setListener(this);
+        schoolsTask.execute("http://petri.esd.usc.edu/socAPI/Schools/");
+
     }
 
 
@@ -60,8 +76,8 @@ public class MainActivity extends ActionBarActivity {
         ParseUser.logOut();
         /*This session getting and clearing eliminates an issue:
          User is logged in to facebook, logs in to App
-         User logs out of Sublime, logs out of Facebook (in either order)
-         User logs back into Sublime and bypasses facebook authentication because the session
+         User logs out of app, logs out of Facebook (in either order)
+         User logs back into app and bypasses facebook authentication because the session
             wasn't cleared (this is the uss)
             */
         com.facebook.Session fbs = com.facebook.Session.getActiveSession();
@@ -74,5 +90,13 @@ public class MainActivity extends ActionBarActivity {
         Intent intent = new Intent(this, SplashActivity.class);
 
         startActivity(intent);
+    }
+
+    public void onSchoolInfoReturn(JSONArray jsonArray){
+        if(jsonArray == null){
+            Log.e(WebRegistrationApplication.getTag(), "Network returned a null object!");
+            return;
+        }
+        Log.d(WebRegistrationApplication.getTag(), jsonArray.toString());
     }
 }
