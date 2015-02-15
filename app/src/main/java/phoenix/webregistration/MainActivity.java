@@ -16,7 +16,7 @@ import org.json.JSONArray;
 
 import phoenix.webregistration.network.NetworkListener;
 import phoenix.webregistration.network.NetworkManager;
-import phoenix.webregistration.network.NetworkSyncTask;
+import phoenix.webregistration.network.USCAPIHelper;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -36,16 +36,15 @@ public class MainActivity extends ActionBarActivity {
         });
 
         // Proper way to obtain info from network - Provided as example.
-        NetworkManager.requestData(NetworkManager.SCHOOLS_URL, new NetworkListener() {
-            @Override
-            public void onDataArrival(JSONArray jsonArray){
-                onSchoolInfoReturn(jsonArray);
-            }
-        });
+        NetworkManager.requestData(USCAPIHelper.SCHOOLS_URL,
+            new NetworkListener() {
+                @Override
+                public void onDataArrival(JSONArray jsonArray){
+                    onSchoolInfoReturn(jsonArray);
+                }
+            });
 
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

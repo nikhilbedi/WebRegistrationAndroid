@@ -15,9 +15,6 @@ import org.json.JSONException;
  * Created by Nikhil on 2/13/2015.
  */
 public class NetworkManager {
-
-    public static final String SCHOOLS_URL = "http://petri.esd.usc.edu/socAPI/Schools/";
-
     /*
      * Creates a string from a reader.
      */
@@ -38,8 +35,7 @@ public class NetworkManager {
         try {
             BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
             String jsonText = readAll(rd);
-            JSONArray json = new JSONArray(jsonText);
-            return json;
+            return new JSONArray(jsonText);
         } finally {
             is.close();
         }

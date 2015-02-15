@@ -1,14 +1,10 @@
 package phoenix.webregistration.network;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.io.IOException;
 import org.json.JSONArray;
 import org.json.JSONException;
-
-import phoenix.webregistration.MainActivity;
-import phoenix.webregistration.WebRegistrationApplication;
 
 /**
  * Created by Nikhil on 2/13/2015.
@@ -30,9 +26,7 @@ public class NetworkSyncTask extends AsyncTask<String, Void, JSONArray> {
         try {
             json = NetworkManager.readJSONFromURL(params[0]);
             return json;
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
         return null;
