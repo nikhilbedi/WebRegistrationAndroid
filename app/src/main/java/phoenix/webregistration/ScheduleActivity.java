@@ -59,10 +59,9 @@ public class ScheduleActivity extends ActionBarActivity {
             /**
              * Portrait mode of the device
              */
-            //mContent = new ScheduleListFragment ();
+            mContent = new ScheduleListFragment ();
             Log.d(WebRegistrationApplication.getTag(), "Portrait mode!");
         }
-        mContent = new ScheduleCalendarFragment();
 
         FragmentManager fm = getFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
