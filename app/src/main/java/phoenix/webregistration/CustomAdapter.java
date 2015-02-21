@@ -26,26 +26,26 @@ public class CustomAdapter extends ArrayAdapter<String> {
     {
         LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View rowView = inflater.inflate(R.layout.row_classes, parent, false);
+        View rowView = inflater.inflate(R.layout.child_department, parent, false);
         TextView textViewSchool = (TextView)rowView.findViewById(R.id.textViewSchool);
-        TextView textViewMajor = (TextView)rowView.findViewById(R.id.textViewMajor);
+       // TextView textViewMajor = (TextView)rowView.findViewById(R.id.textViewMajor);
 
         textViewSchool.setText(mValues[position]);
 
         if (mValues[position].startsWith("Viterbi"))
         {
-            textViewMajor.setText("Computer Science");
+      //      textViewMajor.setText("Computer Science");
         }
         else if (mValues[position].startsWith("Marshall"))
         {
-            textViewMajor.setText("Organizational Business");
+      //      textViewMajor.setText("Organizational Business");
         }
         else if (mValues[position].startsWith("Dornsife"))
         {
-            textViewMajor.setText("Letters, Arts and Science");
+       //     textViewMajor.setText("Letters, Arts and Science");
         }
-        else
-        textViewMajor.setText("Production");
+
+      //  textViewMajor.setText("Production");
 
         return rowView;
     }
