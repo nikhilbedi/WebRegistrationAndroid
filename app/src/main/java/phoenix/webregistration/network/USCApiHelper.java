@@ -4,7 +4,7 @@ package phoenix.webregistration.network;
  * Created by Nikhil on 2/14/2015.
  * A helper class used to build urls for queries.
  */
-public class USCAPIHelper {
+public class USCApiHelper {
 
     public static final String TERMS_URL = "http://petri.esd.usc.edu/socAPI/Terms/";
     public static final String SCHOOLS_URL = "http://petri.esd.usc.edu/socAPI/Schools/";

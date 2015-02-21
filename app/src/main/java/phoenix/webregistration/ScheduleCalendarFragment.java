@@ -86,11 +86,11 @@ public class ScheduleCalendarFragment extends Fragment {
     public String firstDayOfWeek;
     public String lastDayOfWeek;
 
-    public static ArrayList<Entity1> arrayListEntity = new ArrayList<Entity1>();
-    public static ArrayList<Entity1> arrayListEButtonId = new ArrayList<Entity1>();
+    //public static ArrayList<Entity1> arrayListEntity = new ArrayList<Entity1>();
+    //public static ArrayList<Entity1> arrayListEButtonId = new ArrayList<Entity1>();
 
     public int weekDaysCount = 0;
-    public ArrayList<WeekSets> weekDatas;
+   // public ArrayList<WeekSets> weekDatas;
     String tapMargin ;
     String buttonHight;
 
@@ -232,7 +232,7 @@ public class ScheduleCalendarFragment extends Fragment {
         button.setTextSize(9);
         button.setId(buttonID);
         params.setMargins(0, marginTop, 0, 0);
-        arrayListEntity.add(getEntity(jobID, buttonText));
+       // arrayListEntity.add(getEntity(jobID, buttonText));
 
         return button;
 
@@ -247,7 +247,7 @@ public class ScheduleCalendarFragment extends Fragment {
             String buttonText = b.getText().toString();
             int position = 0;
 
-            for (int j = 0; j < arrayListEntity.size(); j++) {
+           /* for (int j = 0; j < arrayListEntity.size(); j++) {
                 Entity1 itemOne = arrayListEntity.get(j);
 
                 String arryJobRefID = itemOne.JobRefID;
@@ -259,11 +259,11 @@ public class ScheduleCalendarFragment extends Fragment {
 
             Entity1 itemOne1 = arrayListEntity.get(position);
             Toast.makeText(getActivity().getApplicationContext(), "  " + itemOne1.JobRefID, Toast.LENGTH_SHORT).show();
-
+*/
         }
     };
 
-    public static Entity1 getEntity(String jobID, String jobRefID) {
+  /*  public static Entity1 getEntity(String jobID, String jobRefID) {
         Entity1 E = new Entity1();
         E.JobIDForButton = jobID;
         E.JobRefID = jobRefID;
@@ -279,7 +279,7 @@ public class ScheduleCalendarFragment extends Fragment {
 
     }
 
-    public static WeekSets getWeekValues(String weekDay, String jobId,
+   /* public static WeekSets getWeekValues(String weekDay, String jobId,
                                          String jobRefId, String tapMargina, String buttonHighta) {
         WeekSets W = new WeekSets();
         W.day = weekDay;
@@ -289,7 +289,7 @@ public class ScheduleCalendarFragment extends Fragment {
         W.buttonHight = buttonHighta;
 
         return W;
-    }
+    } */
 
     public String getWithAndHigthToButton(int startTime) {
 
@@ -426,12 +426,12 @@ public class ScheduleCalendarFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
             try {
-                weekDatas = new ArrayList<WeekSets>();
+               // weekDatas = new ArrayList<WeekSets>();
 
 
 
                 //** for sun day
-                tapMargin = getWithAndHigthToButton(4);
+               /* tapMargin = getWithAndHigthToButton(4);
                 buttonHight = getHeightOfButton(4, 9);
                 weekDatas.add(getWeekValues(String.valueOf(0), "12", "ref",
                         tapMargin, buttonHight));
@@ -450,15 +450,15 @@ public class ScheduleCalendarFragment extends Fragment {
                 weekDatas.add(getWeekValues(String.valueOf(2), "12", "ref",
                         tapMargin, buttonHight));
 
-
+*/
 
                 //** for fr day
-                tapMargin = getWithAndHigthToButton(2);
+  /*              tapMargin = getWithAndHigthToButton(2);
                 buttonHight = getHeightOfButton(2, 10);
                 weekDatas.add(getWeekValues(String.valueOf(5), "12", "ref",
                         tapMargin, buttonHight));
 
-
+*/
 
 
 
@@ -472,113 +472,6 @@ public class ScheduleCalendarFragment extends Fragment {
         @Override
         protected void onPostExecute(String str) {
 
-            try {
-
-                WeekSets weekToDay;
-                int length = weekDatas.size();
-                Log.i("length===>", String.valueOf(length));
-
-                if (length != 0) {
-                    for (int k = 0; k < weekDatas.size(); k++) {
-                        weekToDay = weekDatas.get(k);
-
-                        int day = Integer.parseInt(weekToDay.day);
-                        switch (day) {
-                            case 0:
-
-                                int sunday = 100;
-                                relativeLayoutSunday
-                                        .addView(getButtonToLayout(
-                                                Integer.parseInt(weekToDay.buttonHight),
-                                                Integer.parseInt(weekToDay.tapMargin),
-                                                weekToDay.jobRefID,
-                                                weekToDay.jobID, sunday));
-                                arrayListEButtonId.add(getButton(0, sunday));
-                                sunday++;
-                                break;
-
-                            case 1:
-                                int MonDay = 200;
-                                relativeLayoutMonDay
-                                        .addView(getButtonToLayout(
-                                                Integer.parseInt(weekToDay.buttonHight),
-                                                Integer.parseInt(weekToDay.tapMargin),
-                                                weekToDay.jobRefID,
-                                                weekToDay.jobID, MonDay));
-                                arrayListEButtonId.add(getButton(1, MonDay));
-                                MonDay++;
-                                break;
-                            case 2:
-                                int TueDay = 200;
-                                relativeLayoutTueDay
-                                        .addView(getButtonToLayout(
-                                                Integer.parseInt(weekToDay.buttonHight),
-                                                Integer.parseInt(weekToDay.tapMargin),
-                                                weekToDay.jobRefID,
-                                                weekToDay.jobID, TueDay));
-                                arrayListEButtonId.add(getButton(2, TueDay));
-                                TueDay++;
-                                break;
-                            case 3:
-                                int WedDay = 200;
-                                relativeLayoutWedDay
-                                        .addView(getButtonToLayout(
-                                                Integer.parseInt(weekToDay.buttonHight),
-                                                Integer.parseInt(weekToDay.tapMargin),
-                                                weekToDay.jobRefID,
-                                                weekToDay.jobID, WedDay));
-                                arrayListEButtonId.add(getButton(3, WedDay));
-                                WedDay++;
-                                break;
-                            case 4:
-                                int ThuDay = 200;
-                                relativeLayoutThuDay
-                                        .addView(getButtonToLayout(
-                                                Integer.parseInt(weekToDay.buttonHight),
-                                                Integer.parseInt(weekToDay.tapMargin),
-                                                weekToDay.jobRefID,
-                                                weekToDay.jobID, ThuDay));
-                                arrayListEButtonId.add(getButton(4, ThuDay));
-                                ThuDay++;
-                                break;
-                            case 5:
-                                int FriDay = 200;
-                                relativeLayoutFriDay
-                                        .addView(getButtonToLayout(
-                                                Integer.parseInt(weekToDay.buttonHight),
-                                                Integer.parseInt(weekToDay.tapMargin),
-                                                weekToDay.jobRefID,
-                                                weekToDay.jobID, FriDay));
-                                arrayListEButtonId.add(getButton(5, FriDay));
-                                FriDay++;
-                                break;
-                            case 6:
-                                int SatDay = 200;
-                                relativeLayoutSatDay
-                                        .addView(getButtonToLayout(
-                                                Integer.parseInt(weekToDay.buttonHight),
-                                                Integer.parseInt(weekToDay.tapMargin),
-                                                weekToDay.jobRefID,
-                                                weekToDay.jobID, SatDay));
-                                arrayListEButtonId.add(getButton(6, SatDay));
-                                SatDay++;
-                                break;
-
-                            default:
-                                break;
-                        }
-
-                    }
-
-                }
-
-            } catch (Exception e) {
-                Log.getStackTraceString(e);
-            }
-
-            /*if (dialog.isShowing()) {
-                dialog.dismiss();
-            }*/
 
         }
 
