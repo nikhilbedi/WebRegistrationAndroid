@@ -1,6 +1,6 @@
 package phoenix.webregistration;
 
-import com.parse.ParseAnalytics;
+/*import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
@@ -16,6 +16,7 @@ import android.os.Bundle;
  * @author Nikhil
  *
  */
+/*
 public class SplashActivity extends Activity
 {
     private static final int LOGIN_REQUEST = 0;
@@ -74,4 +75,4 @@ public class SplashActivity extends Activity
 
         }
     }
-}
+}*/
