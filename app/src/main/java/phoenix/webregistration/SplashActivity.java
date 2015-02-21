@@ -48,8 +48,6 @@ public class SplashActivity extends Activity
 
         }
 
-
-        //ParseAnalytics.trackAppOpened(getIntent());
         try {
             if(ParseUser.getCurrentUser() != null) {
                 Thread.sleep(1000);
@@ -67,7 +65,7 @@ public class SplashActivity extends Activity
     }
 
     private void showHomeActivity(boolean isNewUser) {
-        Intent intent = new Intent(this, ScheduleActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
 
         // Pass data along
         intent.putExtra("isNewUser", isNewUser);

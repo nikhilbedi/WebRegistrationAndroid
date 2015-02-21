@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ParseLoginUI/ParseLoginUI.iml" filepath="$PROJECT_DIR$/ParseLoginUI/ParseLoginUI.iml" />
       <module fileurl="file://$PROJECT_DIR$/WebRegistration.iml" filepath="$PROJECT_DIR$/WebRegistration.iml" />
-      <module fileurl="file://$PROJECT_DIR$/WebRegistrationAndroid.iml" filepath="$PROJECT_DIR$/WebRegistrationAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
