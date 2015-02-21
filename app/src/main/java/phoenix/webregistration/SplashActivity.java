@@ -67,7 +67,7 @@ public class SplashActivity extends Activity
     }
 
     private void showHomeActivity(boolean isNewUser) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, ScheduleActivity.class);
 
         // Pass data along
         intent.putExtra("isNewUser", isNewUser);
