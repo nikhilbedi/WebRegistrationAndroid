@@ -3,7 +3,7 @@ package phoenix.webregistration.beans;
 import java.util.Date;
 
 /**
- * Created by Nikhil on 2/22/2015.
+ * A container for common identifiers for a course section
  */
 
 public class Section {
