@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import phoenix.webregistration.beans.School;
 import phoenix.webregistration.network.NetworkListener;
 import phoenix.webregistration.network.NetworkManager;
 import phoenix.webregistration.network.USCApiHelper;
@@ -68,7 +69,8 @@ public class FragmentTabClasses extends Fragment {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject object = jsonArray.getJSONObject(i);
                 String schoolCode = object.getString("SOC_SCHOOL_CODE");
-                final String schoolDescription = object.getString("SOC_SCHOOL_DESCRIPTION");
+                String schoolDescription = object.getString("SOC_SCHOOL_DESCRIPTION");
+                final School school = new School(schoolDescription, schoolCode);
                 listHeaderData.add(schoolDescription);
                 List<String> dept = new ArrayList<String>();
                 NetworkManager.requestData(USCApiHelper.buildDepartmentsURL(schoolCode),
@@ -78,7 +80,7 @@ public class FragmentTabClasses extends Fragment {
                         try {
                             jsonArray = jsonArray.getJSONObject(0).
                                     getJSONArray("SOC_DEPARTMENT_CODE");
-                            getDepartmentData(schoolDescription, jsonArray);
+                            getDepartmentData(school, jsonArray);
                             expandableListAdapter.notifyDataSetChanged();
                         }
                         catch (JSONException e){
@@ -93,7 +95,7 @@ public class FragmentTabClasses extends Fragment {
         }
     }
 
-    private void getDepartmentData(String schoolDesc, JSONArray jsonArray){
+    private void getDepartmentData(School school,JSONArray jsonArray){
         List<String> depts = new ArrayList<String>();
         try {
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -103,7 +105,7 @@ public class FragmentTabClasses extends Fragment {
         catch(JSONException e){
             e.printStackTrace();
         }
-        listChildData.put(schoolDesc, depts);
+        listChildData.put(school.getDescription(), depts);
     }
 
 }

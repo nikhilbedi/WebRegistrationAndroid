@@ -1,27 +1,31 @@
 package phoenix.webregistration.beans;
 
 /**
- * Created by zion on 2/21/2015.
+ * A container for common identifiers for a school
  */
 public class School {
 
-    private String mName;
+    private String description;
+    private String code;
 
-    public School() {
+    public School(String description, String code) {
+        this.description = description;
+        this.code = code;
     }
 
-    public String getmName() {
-        return mName;
+    public String getDescription() {
+        return description;
     }
 
-    public void setmName(String mName) {
-        this.mName = mName;
+    public String getCode() {
+        return code;
     }
 
     @Override
     public String toString() {
         return "School{" +
-                "mName='" + mName + '\'' +
+                "description='" + description + '\'' +
+                ", code='" + code + '\'' +
                 '}';
     }
 }

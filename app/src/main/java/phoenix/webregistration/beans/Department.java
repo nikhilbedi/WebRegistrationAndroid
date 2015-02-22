@@ -1,28 +1,39 @@
 package phoenix.webregistration.beans;
 
 /**
- * Created by zion on 2/21/2015.
+ * A container for common identifiers for a department
  */
 public class Department {
 
-private String mName;
+    private School school;
+    private String description;
+    private String code;
 
-    public String getmName() {
-        return mName;
+    public Department(String School, String description, String code) {
+        this.description = description;
+        this.code = code;
     }
 
-    public void setmName(String mName) {
-        this.mName = mName;
+    public String getDescription() {
+        return description;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public School getSchool() {
+        return school;
     }
 
     @Override
     public String toString() {
         return "Department{" +
-                "mName='" + mName + '\'' +
+                "school=" + school.toString() +
+                ", description='" + description + '\'' +
+                ", code='" + code + '\'' +
                 '}';
     }
 }
-
-
 
 
