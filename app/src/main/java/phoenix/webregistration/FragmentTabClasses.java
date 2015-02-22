@@ -1,8 +1,10 @@
 package phoenix.webregistration;
 
 
+import android.net.Network;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +12,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import phoenix.webregistration.network.NetworkListener;
+import phoenix.webregistration.network.NetworkManager;
+import phoenix.webregistration.network.USCApiHelper;
 
 /**
  * Created by zion on 2/15/2015.
@@ -30,52 +40,70 @@ public class FragmentTabClasses extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragmentclasses, container, false);
 
+        listHeaderData = new ArrayList<String>();
+        listChildData = new HashMap<String, List<String>>();
         expandableListView = (ExpandableListView) rootView.findViewById(R.id.listviewSchoolDept);
-
-        prepareListData();
-
         expandableListAdapter = new ExpandableListAdapter(getActivity(), listHeaderData, listChildData);
-
         expandableListView.setAdapter(expandableListAdapter);
 
-             //   String[] items = new String[] {"Viterbi School of Engineering", "Marshall School of Business", "Dornsife School", "School of Cinematic Arts"};
-     //   ListView listClasses = (ListView)rootView.findViewById(R.id.listClasses);
-        //ArrayAdapter<String> classAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,items );
-     //  ArrayAdapter classAdapter = new CustomAdapter(getActivity(), android.R.layout.simple_list_item_1,items );
-     //   listClasses.setAdapter(classAdapter);
+        NetworkManager.requestData(USCApiHelper.getSchoolsUrl(), new NetworkListener() {
+            @Override
+            public void onDataArrival(JSONArray jsonArray) {
+                getSchoolData(jsonArray);
+                expandableListAdapter.notifyDataSetChanged();
+            }
+        });
+
         return rootView;
     }
 
-    private void prepareListData() {
+    private void getSchoolData(JSONArray jsonArray) {
+        // For each school
+            // add it to listHeaderData
+            // create a new List<String>
+            // For each department in this school
+                // add department name to list
+            // assign school as key, list as value, in listChildData
+        try {
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject object = jsonArray.getJSONObject(i);
+                String schoolCode = object.getString("SOC_SCHOOL_CODE");
+                final String schoolDescription = object.getString("SOC_SCHOOL_DESCRIPTION");
+                listHeaderData.add(schoolDescription);
+                List<String> dept = new ArrayList<String>();
+                NetworkManager.requestData(USCApiHelper.buildDepartmentsURL(schoolCode),
+                new NetworkListener() {
+                    @Override
+                    public void onDataArrival(JSONArray jsonArray) {
+                        try {
+                            jsonArray = jsonArray.getJSONObject(0).
+                                    getJSONArray("SOC_DEPARTMENT_CODE");
+                            getDepartmentData(schoolDescription, jsonArray);
+                            expandableListAdapter.notifyDataSetChanged();
+                        }
+                        catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
 
-        listHeaderData = new ArrayList<String>();
-        listChildData = new HashMap<String, List<String>>();
-
-        // Adding child data
-        listHeaderData.add("Viterbi School");
-        listHeaderData.add("Annenburg");
-        listHeaderData.add("Cinematic Arts");
-
-        // Adding child data
-        List<String> viterbiDept = new ArrayList<String>();
-        viterbiDept.add("Computer Science");
-        viterbiDept.add("Electrical Engineering");
-        viterbiDept.add("Petrochemicals");
-
-        List<String> annenburgDept = new ArrayList<String>();
-        annenburgDept.add("Communication");
-        annenburgDept.add("Media");
-        annenburgDept.add("Arts");
-
-        List<String> cinemaDept = new ArrayList<String>();
-        cinemaDept.add("production");
-        cinemaDept.add("editing");
-
-
-
-        listChildData.put(listHeaderData.get(0), viterbiDept);
-        listChildData.put(listHeaderData.get(1), annenburgDept);
-        listChildData.put(listHeaderData.get(2), cinemaDept);
+    private void getDepartmentData(String schoolDesc, JSONArray jsonArray){
+        List<String> depts = new ArrayList<String>();
+        try {
+            for (int i = 0; i < jsonArray.length(); i++) {
+                depts.add(jsonArray.getJSONObject(i).getString("SOC_DEPARTMENT_DESCRIPTION"));
+            }
+        }
+        catch(JSONException e){
+            e.printStackTrace();
+        }
+        listChildData.put(schoolDesc, depts);
     }
 
 }
