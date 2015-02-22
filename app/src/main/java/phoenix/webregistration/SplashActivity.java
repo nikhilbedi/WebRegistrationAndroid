@@ -42,12 +42,13 @@ public class SplashActivity extends Activity
                 md.update(signature.toByteArray());
                 Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
             }
-        } catch (PackageManager.NameNotFoundException e) {
-
-        } catch (NoSuchAlgorithmException e) {
-
+        } catch (PackageManager.NameNotFoundException | NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
 
+        /* TODO Assign the default term to the USCApiHelper */
+
+        /* Attempt logging in automatically. Otherwise, pull up the log in screen */
         try {
             if(ParseUser.getCurrentUser() != null) {
                 Thread.sleep(1000);
