@@ -23,13 +23,13 @@ public class USCApiHelper {
     }
 
     // have yet to verify if this url will return data
-    public static String buildCoursesURL(String term, String departmentCode){
-        return COURSES_URL + term + "/" + departmentCode;
+    public static String buildCoursesURL(String departmentCode){
+        return COURSES_URL + defaultTerm.getCode() + "/" + departmentCode;
     }
 
     // have yet to verify if this url will return data
-    public static String buildSectionsURL(String term, String courseId){
-        return COURSES_URL + term + "/" + courseId;
+    public static String buildSectionsURL(String courseId){
+        return COURSES_URL + defaultTerm.getCode() + "/" + courseId;
     }
 
     // Verified to work
