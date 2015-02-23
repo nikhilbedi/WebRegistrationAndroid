@@ -10,6 +10,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import phoenix.webregistration.fragments.FragmentTabBin;
+import phoenix.webregistration.fragments.FragmentTabSchool;
+import phoenix.webregistration.fragments.FragmentTabSchedule;
+import phoenix.webregistration.controller.SupportFragTabListener;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -29,16 +33,12 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         setupFragments();
         setupTabs();
-
-
-
-        // Testing commit via Android Studio
     }
 
     private void setupFragments() {
         log("setupFragments");
 
-        fragmentTabClasses = new FragmentTabClasses();
+        fragmentTabClasses = new FragmentTabSchool();
         fragmentTabBin = new FragmentTabBin();
         fragmentTabSchedule = new FragmentTabSchedule();
     }
@@ -58,14 +58,9 @@ public class MainActivity extends ActionBarActivity {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         // Set Tab Icon and Titles
-        ActionBar.Tab Tab1 = actionBar.newTab().setText("CLASSES").setTabListener(new SupportFragTabListener<FragmentTabClasses>(fragmentTabClasses));
+        ActionBar.Tab Tab1 = actionBar.newTab().setText("CLASSES").setTabListener(new SupportFragTabListener<FragmentTabSchool>(fragmentTabClasses));
         ActionBar.Tab Tab2 = actionBar.newTab().setText("COURSE BIN").setTabListener(new SupportFragTabListener<FragmentTabBin>(fragmentTabBin));
         ActionBar.Tab Tab3 = actionBar.newTab().setText("SCHEDULE").setTabListener(new SupportFragTabListener<FragmentTabSchedule>(fragmentTabSchedule));
-
-        // Set Tab Listeners
-        //Tab1.setTabListener(new SupportFragTabListener<FragmentTabClasses>(this,fragmentTabClasses,FragmentTabClasses.class, "classes"));
-        //Tab2.setTabListener(new SupportFragTabListener<FragmentTabBin>(this, fragmentTabBin,FragmentTabBin.class, "mybin"));
-        //Tab3.setTabListener(new SupportFragTabListener<FragmentTabSchedule>(this, fragmentTabSchedule,FragmentTabSchedule.class, "schedule"));
 
         // Add tabs to actionbar
         actionBar.addTab(Tab1);

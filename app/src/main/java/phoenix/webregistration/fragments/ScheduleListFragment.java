@@ -1,10 +1,12 @@
-package phoenix.webregistration;
+package phoenix.webregistration.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import phoenix.webregistration.R;
 
 /**
  * Created by Nikhil on 2/20/2015.

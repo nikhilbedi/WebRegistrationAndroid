@@ -1,4 +1,4 @@
-package phoenix.webregistration;
+package phoenix.webregistration.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
@@ -20,6 +20,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
+import phoenix.webregistration.R;
 
 /**
  * Created by Nikhil on 2/20/2015.

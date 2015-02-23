@@ -5,21 +5,38 @@ package phoenix.webregistration.beans;
  */
 public class Department {
 
-private String mName;
-
-    public String getmName() {
-        return mName;
-    }
-
-    public void setmName(String mName) {
-        this.mName = mName;
-    }
-
     @Override
     public String toString() {
         return "Department{" +
-                "mName='" + mName + '\'' +
+                "mCode='" + mCode + '\'' +
+                ", mDescription='" + mDescription + '\'' +
                 '}';
+    }
+
+    public Department(String mCode, String mDescription) {
+        this.mCode = mCode;
+        this.mDescription = mDescription;
+    }
+
+    public Department(){}
+
+    private String mCode;
+    private String mDescription;
+
+    public String getmCode() {
+        return mCode;
+    }
+
+    public void setmCode(String mCode) {
+        this.mCode = mCode;
+    }
+
+    public String getmDescription() {
+        return mDescription;
+    }
+
+    public void setmDescription(String mDescription) {
+        this.mDescription = mDescription;
     }
 }
 

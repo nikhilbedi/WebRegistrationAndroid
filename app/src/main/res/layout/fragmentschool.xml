@@ -4,9 +4,12 @@
     android:layout_height="match_parent">
 
 
+
     <ExpandableListView
-        android:id="@+id/listviewClassDetails"
+        android:id="@+id/listviewSchoolDept"
         android:layout_height="match_parent"
         android:layout_width="match_parent"/>
+
+
 
 </LinearLayout>

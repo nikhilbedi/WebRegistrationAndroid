@@ -1,4 +1,4 @@
-package phoenix.webregistration.network;
+ package phoenix.webregistration.network;
 
 /**
  * Created by Nikhil on 2/14/2015.
@@ -37,3 +37,5 @@ public class USCApiHelper {
         return SCHOOLS_URL;
     }
 }
+
+

@@ -1,33 +1,15 @@
 package phoenix.webregistration;
 
-import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.res.Configuration;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.Display;
-import android.view.Surface;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import android.view.View.OnClickListener;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import phoenix.webregistration.fragments.ScheduleCalendarFragment;
+import phoenix.webregistration.fragments.ScheduleListFragment;
 
 /**
  * Created by Nikhil on 2/20/2015.
@@ -59,7 +41,7 @@ public class ScheduleActivity extends ActionBarActivity {
             /**
              * Portrait mode of the device
              */
-            mContent = new ScheduleListFragment ();
+            mContent = new ScheduleListFragment();
             Log.d(WebRegistrationApplication.getTag(), "Portrait mode!");
         }
 

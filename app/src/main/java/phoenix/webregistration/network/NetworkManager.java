@@ -10,6 +10,7 @@ import java.nio.charset.Charset;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by Nikhil on 2/13/2015.
@@ -41,6 +42,18 @@ public class NetworkManager {
         }
     }
 
+
+    public static JSONObject readJSONObjectFromURL(String url) throws IOException, JSONException {
+        InputStream is = new URL(url).openStream();
+        try {
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+            String jsonText = readAll(rd);
+            return new JSONObject(jsonText);
+        } finally {
+            is.close();
+        }
+    }
+
     /*
      * A wrapper function for retrieving data asynchronously. Example usage:
      * NetworkManager.requestData("url.com", new NetworkListener() {
@@ -52,6 +65,13 @@ public class NetworkManager {
      */
     public static void requestData(String url, NetworkListener listener) {
         NetworkSyncTask task = new NetworkSyncTask();
+        task.setListener(listener);
+        task.execute(url);
+    }
+
+    public static void requestObjectData(String url, NetworkListener listener)
+    {
+        NetworkJsonObjectSyncTask task = new NetworkJsonObjectSyncTask();
         task.setListener(listener);
         task.execute(url);
     }

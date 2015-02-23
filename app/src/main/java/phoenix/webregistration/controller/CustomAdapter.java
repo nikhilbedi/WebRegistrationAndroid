@@ -1,4 +1,4 @@
-package phoenix.webregistration;
+package phoenix.webregistration.controller;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import phoenix.webregistration.R;
 
 /**
  * Created by zion on 2/18/2015.

@@ -5,9 +5,45 @@ package phoenix.webregistration.beans;
  */
 public class Classes {
 
+    private String mCID;
     private String mTitle;
     private String mID;
     private String mCredits;
+    private String mDescription;
+    private String mSchedule;
+
+    public Classes(String mTitle, String mID, String mCID, String mCredits, String mDescription, String mSchedule) {
+        this.mTitle = mTitle;
+        this.mID = mID;
+        this.mCID = mCID;
+        this.mCredits = mCredits;
+        this.mDescription = mDescription;
+        this.mSchedule = mSchedule;
+    }
+
+    public String getmCID() {
+        return mCID;
+    }
+
+    public void setmCID(String mCID) {
+        this.mCID = mCID;
+    }
+
+    public String getmSchedule() {
+        return mSchedule;
+    }
+
+    public void setmSchedule(String mSchedule) {
+        this.mSchedule = mSchedule;
+    }
+
+    public String getmDescription() {
+        return mDescription;
+    }
+
+    public void setmDescription(String mDescription) {
+        this.mDescription = mDescription;
+    }
 
     public String getmTitle() {
         return mTitle;
@@ -39,6 +75,8 @@ public class Classes {
                 "mTitle='" + mTitle + '\'' +
                 ", mID='" + mID + '\'' +
                 ", mCredits='" + mCredits + '\'' +
+                ", mDescription='" + mDescription + '\'' +
+                ", mSchedule='" + mSchedule + '\'' +
                 '}';
     }
 }
