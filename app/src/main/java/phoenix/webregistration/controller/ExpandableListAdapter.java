@@ -61,7 +61,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        if(mClass != null && mClass.getName().contains("FragmentTabSchool"))
+        if(mClass != null && mClass.getName().contains("FragmentTabSchool") && mListChild.get(mListHeader.get(groupPosition))!= null)
         return mListChild.get(mListHeader.get(groupPosition)).size();
         else
             return mClassListChild.get(mClassListHeader.get(groupPosition)).size();
