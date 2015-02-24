@@ -63,9 +63,11 @@ public class MainActivity extends ActionBarActivity {
         ActionBar.Tab Tab3 = actionBar.newTab().setText("SCHEDULE").setTabListener(new SupportFragTabListener<FragmentTabSchedule>(fragmentTabSchedule));
 
         // Add tabs to actionbar
+         // adding schedule tab first, so that it's the first to be visible
         actionBar.addTab(Tab1);
         actionBar.addTab(Tab2);
-        actionBar.addTab(Tab3);
+        actionBar.addTab(Tab3, true);
+
 
 
     }
@@ -96,5 +98,14 @@ public class MainActivity extends ActionBarActivity {
     public void log(String msg)
     {
         Log.i(LOG_TAG, msg);
+    }
+
+    /*
+    This saves which
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // TODO save info for fragments when rotating screen
     }
 }
