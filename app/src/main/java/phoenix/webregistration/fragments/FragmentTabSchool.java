@@ -103,7 +103,7 @@ public class FragmentTabSchool extends Fragment {
 
                 if(groupPosition != lastExpandedGroupPosition)
                 {
-                  //  expandableListView.collapseGroup(lastExpandedGroupPosition);
+                  expandableListView.collapseGroup(lastExpandedGroupPosition);
                     log("new position = " + groupPosition + "previous group position = " + lastExpandedGroupPosition);
                 }
                 lastExpandedGroupPosition = groupPosition;
@@ -111,12 +111,7 @@ public class FragmentTabSchool extends Fragment {
             }
         });
 
-        expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-                expandableListView.collapseGroup(groupPosition);
-            }
-        });
+
 
     }
 
