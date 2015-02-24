@@ -118,7 +118,7 @@ public class FragmentTabClass extends Fragment {
         expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
             @Override
             public void onGroupCollapse(int groupPosition) {
-                expandableListView.collapseGroup(groupPosition);
+              //mListChild.get(mListHeader.get(groupPosition))  expandableListView.collapseGroup(groupPosition);
             }
         });
 
