@@ -1,7 +1,5 @@
 package phoenix.webregistration;
 
-
-
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -58,9 +56,14 @@ public class MainActivity extends ActionBarActivity {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         // Set Tab Icon and Titles
-        ActionBar.Tab Tab1 = actionBar.newTab().setText("CLASSES").setTabListener(new SupportFragTabListener<FragmentTabSchool>(fragmentTabClasses));
+        ActionBar.Tab Tab1 = actionBar.newTab().setText("").setTabListener(new SupportFragTabListener<FragmentTabSchool>(fragmentTabClasses));
         ActionBar.Tab Tab2 = actionBar.newTab().setText("COURSE BIN").setTabListener(new SupportFragTabListener<FragmentTabBin>(fragmentTabBin));
         ActionBar.Tab Tab3 = actionBar.newTab().setText("SCHEDULE").setTabListener(new SupportFragTabListener<FragmentTabSchedule>(fragmentTabSchedule));
+
+        // Setting icons for tabs
+        Tab1.setIcon(R.drawable.usc_logo);
+        Tab2.setIcon(R.drawable.test);
+        Tab3.setIcon(R.drawable.test);
 
         // Add tabs to actionbar
          // adding schedule tab first, so that it's the first to be visible
