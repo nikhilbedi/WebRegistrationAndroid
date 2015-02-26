@@ -1,14 +1,9 @@
 package phoenix.webregistration.fragments;
 
-
-import android.app.ProgressDialog;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,8 +16,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import phoenix.webregistration.Entity1;
-import phoenix.webregistration.MainActivity;
 import phoenix.webregistration.R;
 import phoenix.webregistration.RegisteredSection;
 
@@ -311,97 +304,90 @@ public class LoadViewsInToWeekView extends AsyncTask<String, Void, String> {
                 if (length != 0) {
                     initializeCalendarViews();
                     for (int k = 0; k < registeredSections.size(); k++) {
-                        weekToDay = registeredSections.get(k);
-                        int day = Integer.parseInt(weekToDay.day);
-                        switch (day) {
-                            case 0:
-                                int sunday = 100;
-                                relativeLayoutSunday
-                                        .addView(getButtonToLayout(
-                                                Integer.parseInt(weekToDay.buttonHight),
-                                                Integer.parseInt(weekToDay.tapMargin),
-                                                weekToDay.jobRefID,
-                                                weekToDay.jobID, sunday));
-                                sunday++;
-                                break;
+                            weekToDay = registeredSections.get(k);
+                            int day = Integer.parseInt(weekToDay.day);
+                            switch (day) {
+                                case 0:
+                                    int sunday = 100;
+                                    relativeLayoutSunday
+                                            .addView(getButtonToLayout(
+                                                    Integer.parseInt(weekToDay.buttonHight),
+                                                    Integer.parseInt(weekToDay.tapMargin),
+                                                    weekToDay.jobRefID,
+                                                    weekToDay.jobID, sunday));
+                                    sunday++;
+                                    break;
 
-                            case 1:
-                                int MonDay = 200;
-                                relativeLayoutMonDay
-                                        .addView(getButtonToLayout(
-                                                Integer.parseInt(weekToDay.buttonHight),
-                                                Integer.parseInt(weekToDay.tapMargin),
-                                                weekToDay.jobRefID,
-                                                weekToDay.jobID, MonDay));
-                                MonDay++;
-                                break;
-                            case 2:
-                                int TueDay = 200;
-                                relativeLayoutTueDay
-                                        .addView(getButtonToLayout(
-                                                Integer.parseInt(weekToDay.buttonHight),
-                                                Integer.parseInt(weekToDay.tapMargin),
-                                                weekToDay.jobRefID,
-                                                weekToDay.jobID, TueDay));
-                                TueDay++;
-                                break;
-                            case 3:
-                                int WedDay = 200;
-                                relativeLayoutWedDay
-                                        .addView(getButtonToLayout(
-                                                Integer.parseInt(weekToDay.buttonHight),
-                                                Integer.parseInt(weekToDay.tapMargin),
-                                                weekToDay.jobRefID,
-                                                weekToDay.jobID, WedDay));
-                                WedDay++;
-                                break;
-                            case 4:
-                                int ThuDay = 200;
-                                relativeLayoutThuDay
-                                        .addView(getButtonToLayout(
-                                                Integer.parseInt(weekToDay.buttonHight),
-                                                Integer.parseInt(weekToDay.tapMargin),
-                                                weekToDay.jobRefID,
-                                                weekToDay.jobID, ThuDay));
-                                ThuDay++;
-                                break;
-                            case 5:
-                                int FriDay = 200;
-                                relativeLayoutFriDay
-                                        .addView(getButtonToLayout(
-                                                Integer.parseInt(weekToDay.buttonHight),
-                                                Integer.parseInt(weekToDay.tapMargin),
-                                                weekToDay.jobRefID,
-                                                weekToDay.jobID, FriDay));
-                                FriDay++;
-                                break;
-                            case 6:
-                                int SatDay = 200;
-                                relativeLayoutSatDay
-                                        .addView(getButtonToLayout(
-                                                Integer.parseInt(weekToDay.buttonHight),
-                                                Integer.parseInt(weekToDay.tapMargin),
-                                                weekToDay.jobRefID,
-                                                weekToDay.jobID, SatDay));
-                                SatDay++;
-                                break;
+                                case 1:
+                                    int MonDay = 200;
+                                    relativeLayoutMonDay
+                                            .addView(getButtonToLayout(
+                                                    Integer.parseInt(weekToDay.buttonHight),
+                                                    Integer.parseInt(weekToDay.tapMargin),
+                                                    weekToDay.jobRefID,
+                                                    weekToDay.jobID, MonDay));
+                                    MonDay++;
+                                    break;
+                                case 2:
+                                    int TueDay = 200;
+                                    relativeLayoutTueDay
+                                            .addView(getButtonToLayout(
+                                                    Integer.parseInt(weekToDay.buttonHight),
+                                                    Integer.parseInt(weekToDay.tapMargin),
+                                                    weekToDay.jobRefID,
+                                                    weekToDay.jobID, TueDay));
+                                    TueDay++;
+                                    break;
+                                case 3:
+                                    int WedDay = 200;
+                                    relativeLayoutWedDay
+                                            .addView(getButtonToLayout(
+                                                    Integer.parseInt(weekToDay.buttonHight),
+                                                    Integer.parseInt(weekToDay.tapMargin),
+                                                    weekToDay.jobRefID,
+                                                    weekToDay.jobID, WedDay));
+                                    WedDay++;
+                                    break;
+                                case 4:
+                                    int ThuDay = 200;
+                                    relativeLayoutThuDay
+                                            .addView(getButtonToLayout(
+                                                    Integer.parseInt(weekToDay.buttonHight),
+                                                    Integer.parseInt(weekToDay.tapMargin),
+                                                    weekToDay.jobRefID,
+                                                    weekToDay.jobID, ThuDay));
+                                    ThuDay++;
+                                    break;
+                                case 5:
+                                    int FriDay = 200;
+                                    relativeLayoutFriDay
+                                            .addView(getButtonToLayout(
+                                                    Integer.parseInt(weekToDay.buttonHight),
+                                                    Integer.parseInt(weekToDay.tapMargin),
+                                                    weekToDay.jobRefID,
+                                                    weekToDay.jobID, FriDay));
+                                    FriDay++;
+                                    break;
+                                case 6:
+                                    int SatDay = 200;
+                                    relativeLayoutSatDay
+                                            .addView(getButtonToLayout(
+                                                    Integer.parseInt(weekToDay.buttonHight),
+                                                    Integer.parseInt(weekToDay.tapMargin),
+                                                    weekToDay.jobRefID,
+                                                    weekToDay.jobID, SatDay));
+                                    SatDay++;
+                                    break;
 
-                            default:
-                                break;
+                                default:
+                                    break;
+                            }
+
                         }
-
                     }
-
-                }
-
-            } catch (Exception e) {
+                } catch (Exception e) {
                 e.printStackTrace();
-            }
-
-            /*if (dialog.isShowing()) {
-                dialog.dismiss();
-           }*/
-
+                }
             }
         }
 

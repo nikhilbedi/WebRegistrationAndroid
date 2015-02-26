@@ -18,10 +18,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import phoenix.webregistration.beans.Classes;
+import phoenix.webregistration.beans.Course;
 import phoenix.webregistration.beans.Section;
 import phoenix.webregistration.controller.ExpandableListAdapterCourseBin;
-import phoenix.webregistration.controller.ExpandableListAdapterSchool;
 import phoenix.webregistration.R;
 import phoenix.webregistration.network.NetworkListener;
 import phoenix.webregistration.network.NetworkManager;
@@ -41,8 +40,8 @@ public class FragmentTabBin extends Fragment {
     private final String term = "20151";
     private String departmentCode;
 
-    private List<Classes> listHeaderData;
-    private HashMap<Classes, List<Section>> listChildData;
+    private List<Course> listHeaderData;
+    private HashMap<Course, List<Section>> listChildData;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,8 +58,8 @@ public class FragmentTabBin extends Fragment {
 
         log("DC is = " + departmentCode);
 
-        listHeaderData = new ArrayList<Classes>();
-        listChildData = new HashMap<Classes, List<Section>>();
+        listHeaderData = new ArrayList<Course>();
+        listChildData = new HashMap<Course, List<Section>>();
         expandableListView = (ExpandableListView) rootView.findViewById(R.id.listviewCourseBin);
         expandableListAdapter = new ExpandableListAdapterCourseBin(getActivity(),listHeaderData, listChildData);
         expandableListView.setAdapter(expandableListAdapter);
@@ -145,7 +144,7 @@ public class FragmentTabBin extends Fragment {
                 String courseCredits = object.getString("MAX_UNITS");
                 String courseDescription = object.getString("DESCRIPTION");
 
-                final Classes classObj = new Classes(courseTitle, courseID, cID, courseCredits, courseDescription, null);
+                final Course classObj = new Course(courseTitle, courseID, cID, courseCredits, courseDescription, null);
 
                 log("class object is " + classObj);
                 listHeaderData.add(classObj);
@@ -185,7 +184,7 @@ public class FragmentTabBin extends Fragment {
         }
     }
 
-    private void getSectionData(Classes classObj, JSONArray jsonArray){
+    private void getSectionData(Course classObj, JSONArray jsonArray){
 
         List<Section> sections = new ArrayList<Section>();
 

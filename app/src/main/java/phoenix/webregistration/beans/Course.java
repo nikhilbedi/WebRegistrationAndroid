@@ -3,7 +3,7 @@ package phoenix.webregistration.beans;
 /**
  * Created by zion on 2/21/2015.
  */
-public class Classes {
+public class Course {
 
     private String mCID;
     private String mTitle;
@@ -12,7 +12,7 @@ public class Classes {
     private String mDescription;
     private String mSchedule;
 
-    public Classes(String mTitle, String mID, String mCID, String mCredits, String mDescription, String mSchedule) {
+    public Course(String mTitle, String mID, String mCID, String mCredits, String mDescription, String mSchedule) {
         this.mTitle = mTitle;
         this.mID = mID;
         this.mCID = mCID;

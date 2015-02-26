@@ -13,10 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import phoenix.webregistration.R;
-import phoenix.webregistration.beans.Classes;
 import phoenix.webregistration.beans.Department;
 import phoenix.webregistration.beans.School;
-import phoenix.webregistration.beans.Section;
 
 /**
  * Created by zion on 2/21/2015.
