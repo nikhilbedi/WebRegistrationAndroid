@@ -20,8 +20,9 @@ import java.util.List;
 
 import phoenix.webregistration.beans.Classes;
 import phoenix.webregistration.beans.Section;
-import phoenix.webregistration.controller.ExpandableListAdapter;
+import phoenix.webregistration.controller.ExpandableListAdapterClasses;
 import phoenix.webregistration.R;
+import phoenix.webregistration.controller.ExpandableListAdapterClasses;
 import phoenix.webregistration.network.NetworkListener;
 import phoenix.webregistration.network.NetworkManager;
 import phoenix.webregistration.network.USCApiHelper;
@@ -31,7 +32,7 @@ import phoenix.webregistration.network.USCApiHelper;
  */
 public class FragmentTabClass extends Fragment {
 
-    private ExpandableListAdapter expandableListAdapter;
+    private ExpandableListAdapterClasses expandableListAdapter;
     private ExpandableListView expandableListView;
     private int lastExpandedGroupPosition = 0;
 
@@ -60,7 +61,7 @@ public class FragmentTabClass extends Fragment {
         listHeaderData = new ArrayList<Classes>();
         listChildData = new HashMap<Classes, List<Section>>();
         expandableListView = (ExpandableListView) rootView.findViewById(R.id.listviewClassDetails);
-        expandableListAdapter = new ExpandableListAdapter(getActivity(),listHeaderData, listChildData);
+        expandableListAdapter = new ExpandableListAdapterClasses(getActivity(),listHeaderData, listChildData);
         expandableListView.setAdapter(expandableListAdapter);
 
         // change below
