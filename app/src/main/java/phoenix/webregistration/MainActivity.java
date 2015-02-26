@@ -9,11 +9,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import phoenix.webregistration.controller.SupportFragTabListener;
 import phoenix.webregistration.fragments.FragmentTabBin;
 import phoenix.webregistration.fragments.FragmentTabSchool;
 import phoenix.webregistration.fragments.FragmentTabSchedule;
-import phoenix.webregistration.controller.SupportFragTabListener;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -57,20 +60,30 @@ public class MainActivity extends ActionBarActivity {
         // Create Actionbar Tabs
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
+
+
+
+
         // Set Tab Icon and Titles
-        ActionBar.Tab Tab1 = actionBar.newTab().setText("CLASSES").setTabListener(new SupportFragTabListener<FragmentTabSchool>(fragmentTabClasses));
-        ActionBar.Tab Tab2 = actionBar.newTab().setText("COURSE BIN").setTabListener(new SupportFragTabListener<FragmentTabBin>(fragmentTabBin));
-        ActionBar.Tab Tab3 = actionBar.newTab().setText("SCHEDULE").setTabListener(new SupportFragTabListener<FragmentTabSchedule>(fragmentTabSchedule));
+        ActionBar.Tab tabClasses = actionBar.newTab().setCustomView(R.layout.customtab_classes).setTabListener(new SupportFragTabListener<FragmentTabSchool>(fragmentTabClasses));
+        ActionBar.Tab tabCourseBin = actionBar.newTab().setCustomView(R.layout.customtab_coursebin).setTabListener(new SupportFragTabListener<FragmentTabBin>(fragmentTabBin));
+        ActionBar.Tab tabSchedule= actionBar.newTab().setCustomView(R.layout.customtab_schedule).setTabListener(new SupportFragTabListener<FragmentTabSchedule>(fragmentTabSchedule));
+
+       // tabClasses.setIcon(R.drawable.tabiconclasses);
+       // tabCourseBin.setIcon(R.drawable.tabiconcoursebin);
+       // tabSchedule.setIcon(R.drawable.tabiconschedule);
+
 
         // Add tabs to actionbar
-         // adding schedule tab first, so that it's the first to be visible
-        actionBar.addTab(Tab1);
-        actionBar.addTab(Tab2);
-        actionBar.addTab(Tab3, true);
-
+        actionBar.addTab(tabClasses);
+        actionBar.addTab(tabCourseBin);
+        actionBar.addTab(tabSchedule);
 
 
     }
+
+
+
 
 
     @Override
@@ -98,14 +111,5 @@ public class MainActivity extends ActionBarActivity {
     public void log(String msg)
     {
         Log.i(LOG_TAG, msg);
-    }
-
-    /*
-    This saves which
-     */
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        // TODO save info for fragments when rotating screen
     }
 }
