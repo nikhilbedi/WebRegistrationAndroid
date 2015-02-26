@@ -4,9 +4,10 @@
 
     <!-- the theme applied to the application or activity -->
     <style name="CustomActionBarTheme" parent="Theme.AppCompat.Light">
-        <item name="colorPrimary">@color/brickred</item>
+        <item name="colorPrimary">@color/uscred</item>
    <item name="actionBarStyle">@style/CustomActionBar</item>
-   <item name="actionBarTabStyle">@style/CustomActionBarTabs</item>
+   <item name="android:actionBarTabTextStyle">@style/CustomActionBarTabs.Tabtheme</item>
+   <item name="actionBarTabTextStyle">@style/CustomActionBarTabs.Tabtheme</item>
    <item name="actionMenuTextColor">@color/white</item>
     </style>
 
@@ -21,15 +22,28 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="CustomActionBarTabs" parent="@style/Widget.AppCompat.ActionBar.TabView">
-        <item name="titleTextStyle">@style/MyActionBarTabText</item>
-        <item name="android:textColor">@color/white</item>
+    <style name="CustomActionBarTabs.Tabtheme" parent="@style/Widget.AppCompat.ActionBar.TabText">
+       <!-- <item name="titleTextStyle">@style/MyActionBarTabText</item>-->
+        <item name="android:textColor">@color/grey</item>
         </style>
 
 
 
     <!-- ActionBar tabs text styles -->
     <style name="MyActionBarTabText" parent="@style/Widget.AppCompat.ActionBar.TabText">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
+    <style name="Theme.Tabtheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+
+
+        <item name="android:actionBarTabTextStyle">@style/ActionBarTabTextStyle.Tabtheme</item>
+        <item name="actionBarTabTextStyle">@style/ActionBarTabTextStyle.Tabtheme</item>
+
+    </style>
+
+    <style name="ActionBarTabTextStyle.Tabtheme" parent="Widget.AppCompat.ActionBar.TabText">
         <item name="android:textColor">@color/white</item>
     </style>
 </resources>

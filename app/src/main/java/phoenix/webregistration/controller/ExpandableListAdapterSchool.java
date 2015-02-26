@@ -1,6 +1,7 @@
 package phoenix.webregistration.controller;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import java.util.List;
 import phoenix.webregistration.R;
 import phoenix.webregistration.beans.Classes;
 import phoenix.webregistration.beans.Department;
+import phoenix.webregistration.beans.School;
 import phoenix.webregistration.beans.Section;
 
 /**
@@ -24,14 +26,15 @@ public class ExpandableListAdapterSchool extends BaseExpandableListAdapter {
 
     private Context mContext;
     private Class mClass;
-    private List<String> mListHeader;
-    private HashMap <String, List<Department>> mListChild;
+    private List<School> mListHeader;
+    private HashMap <School, List<Department>> mListChild;
+    private int sdk = android.os.Build.VERSION.SDK_INT;
 
 
     private final String LOG_TAG = "ExpandableListAdapter";
 
 
-    public ExpandableListAdapterSchool(Context context, Class classname, List<String> listHeader, HashMap<String, List<Department>> listChild)
+    public ExpandableListAdapterSchool(Context context, Class classname, List<School> listHeader, HashMap<School, List<Department>> listChild)
     {
     mContext = context;
     mClass = classname;
@@ -92,29 +95,38 @@ public class ExpandableListAdapterSchool extends BaseExpandableListAdapter {
 
         log("getGroupView");
 
-
-
-            log("FragmentTabSchool");
-            String headerText = (String) getGroup(groupPosition);
+            School school = (School) getGroup(groupPosition);
             if (convertView == null) {
                 LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = inflater.inflate(R.layout.header_school_new, null);
+                 convertView = inflater.inflate(R.layout.header_school_new, null);
             }
             TextView viewSchoolHeader = (TextView) convertView.findViewById(R.id.textViewSchoolHeader);
             TextView viewSchoolTitle = (TextView) convertView.findViewById(R.id.textViewSchoolTitle);
 
-            String []text = headerText.split(" ");
+            String code = school.getmCode();
+            String description = school.getmDescription();
+
+        String codeImage = code.toLowerCase();
+        log("school code is " + codeImage);
+
+        if(!(("CNTV".equals(code)) ||("DHRP".equals(code)) || ("GE".equals(code)) || ("GRAD".equals(code)) || ("SOWK".equals(code)) || ("THTR").equals(code))) {
+            String[] text = description.split(" ");
             viewSchoolHeader.setText(text[0]);
 
             String title = " ";
-            for(int i = 1; i< text.length; i++)
-            {
+            for (int i = 1; i < text.length; i++) {
                 title = title.concat(text[i]) + " ";
             }
             log("title = " + title);
             viewSchoolTitle.setText(title);
+        }
+        else
+        {
+            viewSchoolHeader.setText(description);
+            viewSchoolTitle.setText("");
+        }
 
-       // viewSchoolHeader.setText(title);
+
         if(isExpanded)
         {
             //viewSchoolHeader.setTextColor(context.getResources().getColor(R.color.grey));
@@ -126,6 +138,19 @@ public class ExpandableListAdapterSchool extends BaseExpandableListAdapter {
             //tv.setTextColor(context.getResources().getColor(R.color.white));
            // viewSchoolHeader.setTextAppearance(mContext, R.style.Base_TextAppearance_AppCompat_Medium);
         }
+
+
+
+
+        int imageIdentifier = mContext.getResources().getIdentifier(codeImage, "drawable", mContext.getPackageName());
+        log("identifier is " + imageIdentifier);
+        Drawable drawable = mContext.getResources().getDrawable(imageIdentifier);
+        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            convertView.setBackgroundDrawable( drawable );
+        } else {
+            convertView.setBackground(drawable);
+        }
+
 
         return convertView;
     }
@@ -147,6 +172,9 @@ public class ExpandableListAdapterSchool extends BaseExpandableListAdapter {
 
             TextView viewDeptChild = (TextView) convertView.findViewById(R.id.textViewDept);
             viewDeptChild.setText(department.getmDescription());
+
+            TextView viewDeptCodeChild = (TextView) convertView.findViewById(R.id.textViewDeptCode);
+            viewDeptCodeChild.setText(department.getmCode());
 
         return convertView;
     }

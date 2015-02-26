@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import phoenix.webregistration.beans.Department;
+import phoenix.webregistration.beans.School;
 import phoenix.webregistration.controller.ExpandableListAdapterSchool;
 import phoenix.webregistration.R;
 import phoenix.webregistration.network.NetworkListener;
@@ -36,21 +37,21 @@ public class FragmentTabSchool extends Fragment {
     private int lastExpandedGroupPosition = 0;
     private final String LOG_TAG = "FragmentTabClasses";
 
-    private List<String> listHeaderData;
-    private HashMap<String, List<Department>> listChildData;
+    private List<School> listHeaderData;
+    private HashMap<School, List<Department>> listChildData;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragmentschool, container, false);
 
-        listHeaderData = new ArrayList<String>();
-        listChildData = new HashMap<String, List<Department>>();
+        listHeaderData = new ArrayList<School>();
+        listChildData = new HashMap<School, List<Department>>();
         expandableListView = (ExpandableListView) rootView.findViewById(R.id.listviewSchoolDept);
         expandableListAdapterSchool = new ExpandableListAdapterSchool(getActivity(), this.getClass(), listHeaderData, listChildData);
         expandableListView.setAdapter(expandableListAdapterSchool);
 
-        fetchDummyData();
+        //fetchDummyData();
 
         NetworkManager.requestData(USCApiHelper.getSchoolsUrl(), new NetworkListener() {
             @Override
@@ -130,7 +131,9 @@ public class FragmentTabSchool extends Fragment {
                 JSONObject object = jsonArray.getJSONObject(i);
                 String schoolCode = object.getString("SOC_SCHOOL_CODE");
                 final String schoolDescription = object.getString("SOC_SCHOOL_DESCRIPTION");
-                listHeaderData.add(schoolDescription);
+                final School school = new School(schoolCode, schoolDescription);
+
+                listHeaderData.add(school);
                 NetworkManager.requestData(USCApiHelper.buildDepartmentsURL(schoolCode),
                 new NetworkListener() {
                     @Override
@@ -138,7 +141,7 @@ public class FragmentTabSchool extends Fragment {
                         try {
                             jsonArray = jsonArray.getJSONObject(0).
                                     getJSONArray("SOC_DEPARTMENT_CODE");
-                            getDepartmentData(schoolDescription, jsonArray);
+                            getDepartmentData(school, jsonArray);
                             expandableListAdapterSchool.notifyDataSetChanged();
                         }
                         catch (JSONException e){
@@ -158,7 +161,7 @@ public class FragmentTabSchool extends Fragment {
         }
     }
 
-    private void getDepartmentData(String schoolDesc, JSONArray jsonArray){
+    private void getDepartmentData(School school, JSONArray jsonArray){
         List<Department> depts = new ArrayList<Department>();
         try {
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -172,14 +175,14 @@ public class FragmentTabSchool extends Fragment {
         catch(JSONException e){
             e.printStackTrace();
         }
-        listChildData.put(schoolDesc, depts);
+        listChildData.put(school, depts);
     }
 
     private void fetchDummyData()
     {
-        listHeaderData.add("Viterbi School of Engineering");
-        listHeaderData.add("MArshall school of business");
-        listHeaderData.add("Annenburg school of comm");
+        listHeaderData.add(new School("ENGR", "Viterbi School of Engineering"));
+        listHeaderData.add(new School("MSBC","MArshall school of business"));
+        listHeaderData.add(new School ("ANNB","Annenburg school of comm"));
 
         // Adding child data
         List<Department> top250 = new ArrayList<Department>();

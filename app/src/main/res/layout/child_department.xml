@@ -12,6 +12,16 @@
         android:id="@+id/textViewDept"
         android:layout_gravity="left"
         android:layout_margin="5dp"
-        android:textSize="14sp"
+        android:textSize="17sp"
         android:textIsSelectable="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewDeptCode"
+        android:layout_alignBottom="@+id/textViewDept"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="17sp"
+        android:layout_margin="5dp" />
 </RelativeLayout>

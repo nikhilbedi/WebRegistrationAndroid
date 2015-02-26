@@ -15,10 +15,10 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
-        android:textSize="30sp"
+        android:textSize="35sp"
         android:textColor="#ffffffff"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp" />
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="18dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,8 +29,8 @@
         android:layout_below="@+id/textViewSchoolHeader"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textSize="18sp"
-        android:layout_marginLeft="10dp"
+        android:textSize="20sp"
+        android:layout_marginLeft="15dp"
         android:textColor="#ffffffff"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="10dp" />
