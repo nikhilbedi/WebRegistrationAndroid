@@ -20,7 +20,8 @@ import java.util.List;
 
 import phoenix.webregistration.beans.Classes;
 import phoenix.webregistration.beans.Section;
-import phoenix.webregistration.controller.ExpandableListAdapter;
+import phoenix.webregistration.controller.ExpandableListAdapterClasses;
+import phoenix.webregistration.controller.ExpandableListAdapterSchool;
 import phoenix.webregistration.R;
 import phoenix.webregistration.network.NetworkListener;
 import phoenix.webregistration.network.NetworkManager;
@@ -31,7 +32,7 @@ import phoenix.webregistration.network.USCApiHelper;
  */
 public class FragmentTabClass extends Fragment {
 
-    private ExpandableListAdapter expandableListAdapter;
+    private ExpandableListAdapterClasses expandableListAdapter;
     private ExpandableListView expandableListView;
     private int lastExpandedGroupPosition = 0;
 
@@ -60,23 +61,23 @@ public class FragmentTabClass extends Fragment {
         listHeaderData = new ArrayList<Classes>();
         listChildData = new HashMap<Classes, List<Section>>();
         expandableListView = (ExpandableListView) rootView.findViewById(R.id.listviewClassDetails);
-        expandableListAdapter = new ExpandableListAdapter(getActivity(),listHeaderData, listChildData);
+        expandableListAdapter = new ExpandableListAdapterClasses(getActivity(),listHeaderData, listChildData);
         expandableListView.setAdapter(expandableListAdapter);
 
         // change below
-       NetworkManager.requestData(USCApiHelper.buildCoursesURL(term, departmentCode), new NetworkListener() {
+        NetworkManager.requestData(USCApiHelper.buildCoursesURL(term, departmentCode), new NetworkListener() {
             @Override
             public void onDataArrival(JSONArray jsonArray) {
                 log("NetworkManager");
                 getClassesData(jsonArray);
-               // expandableListAdapter.notifyDataSetChanged();
+                // expandableListAdapter.notifyDataSetChanged();
             }
 
-           @Override
-           public void onDataObjectArrival(JSONObject jsonObject) {
-               // do nothing
-           }
-       });
+            @Override
+            public void onDataObjectArrival(JSONObject jsonObject) {
+                // do nothing
+            }
+        });
 
 
         setListeners();
@@ -108,7 +109,7 @@ public class FragmentTabClass extends Fragment {
 
                 if(groupPosition != lastExpandedGroupPosition)
                 {
-                   // expandableListView.collapseGroup(lastExpandedGroupPosition);
+                    expandableListView.collapseGroup(lastExpandedGroupPosition);
                 }
                 lastExpandedGroupPosition = groupPosition;
 
@@ -118,7 +119,7 @@ public class FragmentTabClass extends Fragment {
         expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
             @Override
             public void onGroupCollapse(int groupPosition) {
-              //mListChild.get(mListHeader.get(groupPosition))  expandableListView.collapseGroup(groupPosition);
+                //expandableListView.collapseGroup(groupPosition);
             }
         });
 
@@ -143,7 +144,7 @@ public class FragmentTabClass extends Fragment {
                 String courseCredits = object.getString("MAX_UNITS");
                 String courseDescription = object.getString("DESCRIPTION");
 
-               final Classes classObj = new Classes(courseTitle, courseID, cID, courseCredits, courseDescription, null);
+                final Classes classObj = new Classes(courseTitle, courseID, cID, courseCredits, courseDescription, null);
 
                 log("class object is " + classObj);
                 listHeaderData.add(classObj);
@@ -162,7 +163,7 @@ public class FragmentTabClass extends Fragment {
                                     JSONArray jsonArray;
                                     if (jsonObject != null) {
                                         jsonArray = jsonObject.getJSONArray("V_SOC_SECTION");
-                                      //  log("jsonObject is = " + jsonObject.toString());
+                                        //  log("jsonObject is = " + jsonObject.toString());
                                         getSectionData(classObj, jsonArray);
                                         expandableListAdapter.notifyDataSetChanged();
 
@@ -174,7 +175,7 @@ public class FragmentTabClass extends Fragment {
                             }
                         });
 
-               // List<Classes> classList = new ArrayList<Classes>();
+                // List<Classes> classList = new ArrayList<Classes>();
 
             }
         }
@@ -207,7 +208,7 @@ public class FragmentTabClass extends Fragment {
 
                 sections.add(section);
             }
-                listChildData.put(classObj, sections);
+            listChildData.put(classObj, sections);
 
         }
         catch(JSONException e){
