@@ -21,7 +21,6 @@ import java.util.List;
 import phoenix.webregistration.beans.Classes;
 import phoenix.webregistration.beans.Section;
 import phoenix.webregistration.controller.ExpandableListAdapterClasses;
-import phoenix.webregistration.controller.ExpandableListAdapterSchool;
 import phoenix.webregistration.R;
 import phoenix.webregistration.network.NetworkListener;
 import phoenix.webregistration.network.NetworkManager;
