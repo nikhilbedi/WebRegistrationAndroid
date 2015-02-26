@@ -62,6 +62,7 @@ public class MainActivity extends ActionBarActivity {
         ActionBar.Tab Tab2 = actionBar.newTab().setText("COURSE BIN").setTabListener(new SupportFragTabListener<FragmentTabBin>(fragmentTabBin));
         ActionBar.Tab Tab3 = actionBar.newTab().setText("SCHEDULE").setTabListener(new SupportFragTabListener<FragmentTabSchedule>(fragmentTabSchedule));
 
+
         // Add tabs to actionbar
         actionBar.addTab(Tab1);
         actionBar.addTab(Tab2);

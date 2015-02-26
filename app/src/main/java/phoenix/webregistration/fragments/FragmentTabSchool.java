@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import phoenix.webregistration.beans.Department;
-import phoenix.webregistration.controller.ExpandableListAdapter;
+import phoenix.webregistration.controller.ExpandableListAdapterSchool;
 import phoenix.webregistration.R;
 import phoenix.webregistration.network.NetworkListener;
 import phoenix.webregistration.network.NetworkManager;
@@ -31,7 +31,7 @@ import phoenix.webregistration.network.USCApiHelper;
  */
 public class FragmentTabSchool extends Fragment {
 
-    private ExpandableListAdapter expandableListAdapter;
+    private ExpandableListAdapterSchool expandableListAdapterSchool;
     private ExpandableListView expandableListView;
     private int lastExpandedGroupPosition = 0;
     private final String LOG_TAG = "FragmentTabClasses";
@@ -47,14 +47,16 @@ public class FragmentTabSchool extends Fragment {
         listHeaderData = new ArrayList<String>();
         listChildData = new HashMap<String, List<Department>>();
         expandableListView = (ExpandableListView) rootView.findViewById(R.id.listviewSchoolDept);
-        expandableListAdapter = new ExpandableListAdapter(getActivity(), this.getClass(), listHeaderData, listChildData);
-        expandableListView.setAdapter(expandableListAdapter);
+        expandableListAdapterSchool = new ExpandableListAdapterSchool(getActivity(), this.getClass(), listHeaderData, listChildData);
+        expandableListView.setAdapter(expandableListAdapterSchool);
+
+        fetchDummyData();
 
         NetworkManager.requestData(USCApiHelper.getSchoolsUrl(), new NetworkListener() {
             @Override
             public void onDataArrival(JSONArray jsonArray) {
                 getSchoolData(jsonArray);
-                expandableListAdapter.notifyDataSetChanged();
+                expandableListAdapterSchool.notifyDataSetChanged();
             }
 
             @Override
@@ -85,7 +87,7 @@ public class FragmentTabSchool extends Fragment {
 
                 log("child clicked");
 
-                Department dept = (Department)expandableListAdapter.getChild(groupPosition, childPosition);
+                Department dept = (Department) expandableListAdapterSchool.getChild(groupPosition, childPosition);
 
                 Bundle bundle = new Bundle();
                 bundle.putString("DepartmentCode", dept.getmCode());
@@ -124,7 +126,7 @@ public class FragmentTabSchool extends Fragment {
                 // add department name to list
             // assign school as key, list as value, in listChildData
         try {
-            for (int i = 0; i < jsonArray.length(); i++) {
+            for (int i = 0; i < jsonArray.length() && jsonArray != null ; i++) {
                 JSONObject object = jsonArray.getJSONObject(i);
                 String schoolCode = object.getString("SOC_SCHOOL_CODE");
                 final String schoolDescription = object.getString("SOC_SCHOOL_DESCRIPTION");
@@ -137,7 +139,7 @@ public class FragmentTabSchool extends Fragment {
                             jsonArray = jsonArray.getJSONObject(0).
                                     getJSONArray("SOC_DEPARTMENT_CODE");
                             getDepartmentData(schoolDescription, jsonArray);
-                            expandableListAdapter.notifyDataSetChanged();
+                            expandableListAdapterSchool.notifyDataSetChanged();
                         }
                         catch (JSONException e){
                             e.printStackTrace();
@@ -173,6 +175,30 @@ public class FragmentTabSchool extends Fragment {
         listChildData.put(schoolDesc, depts);
     }
 
+    private void fetchDummyData()
+    {
+        listHeaderData.add("Viterbi School of Engineering");
+        listHeaderData.add("MArshall school of business");
+        listHeaderData.add("Annenburg school of comm");
+
+        // Adding child data
+        List<Department> top250 = new ArrayList<Department>();
+        top250.add(new Department("ABCD", "The Shawshank Redemption"));
+        top250.add(new Department("BCDE", "The Godfather"));
+
+
+        List<Department> nowShowing = new ArrayList<Department>();
+        nowShowing.add(new Department("ABCD", "The Shawshank Redemption"));
+        nowShowing.add(new Department("BCDE", "The Godfather"));
+
+        List<Department> comingSoon = new ArrayList<Department>();
+        comingSoon.add(new Department("ABCD", "The Shawshank Redemption"));
+        comingSoon.add(new Department("BCDE", "The Godfather"));
+
+        listChildData.put(listHeaderData.get(0), top250); // Header, Child data
+        listChildData.put(listHeaderData.get(1), nowShowing);
+        listChildData.put(listHeaderData.get(2), comingSoon);
+    }
     private void log(String msg)
     {
         Log.i(LOG_TAG, msg);
