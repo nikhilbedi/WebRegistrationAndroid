@@ -1,6 +1,7 @@
 package phoenix.webregistration.controller;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +9,16 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import phoenix.webregistration.R;
-import phoenix.webregistration.beans.Course;
+import phoenix.webregistration.beans.Classes;
+import phoenix.webregistration.beans.Department;
 import phoenix.webregistration.beans.Section;
 
 /**
@@ -24,13 +30,13 @@ public class ExpandableListAdapterCourseBin extends BaseExpandableListAdapter {
     private Context mContext;
     private Class mClass;
 
-    private List<Course> mClassListHeader;
-    private HashMap<Course, List<Section>> mClassListChild;
+    private List<Classes> mClassListHeader;
+    private HashMap<Classes, List<Section>> mClassListChild;
 
     private final String LOG_TAG = "ExpandableListAdapter";
 
-
-    public ExpandableListAdapterCourseBin(Context context, List<Course> classListHeader, HashMap<Course, List<Section>> classListChild)
+    private int sdk = android.os.Build.VERSION.SDK_INT;
+    public ExpandableListAdapterCourseBin(Context context, List<Classes> classListHeader, HashMap<Classes, List<Section>> classListChild)
     {
         mContext = context;
         mClassListHeader = classListHeader;
@@ -85,7 +91,7 @@ public class ExpandableListAdapterCourseBin extends BaseExpandableListAdapter {
         log("getGroupView");
 
 
-            Course classObj = (Course) getGroup(groupPosition);
+            Classes classObj = (Classes) getGroup(groupPosition);
             if (convertView == null) {
                 LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = inflater.inflate(R.layout.header_class_coursebin, null);
@@ -97,6 +103,24 @@ public class ExpandableListAdapterCourseBin extends BaseExpandableListAdapter {
             viewClassID.setText(classObj.getmID());
             viewClassCredits.setText(classObj.getmCredits());
             viewClassTitle.setText(classObj.getmTitle());
+
+
+        Drawable drawable = null;
+
+        if(0 == groupPosition%2)
+        {
+            drawable = mContext.getResources().getDrawable(R.color.lightblack);
+        }
+        else
+        {
+            drawable = mContext.getResources().getDrawable(R.color.lighterblack);
+        }
+
+        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            convertView.setBackgroundDrawable(drawable);
+        } else {
+            convertView.setBackground(drawable);
+        }
 
         return convertView;
     }
@@ -116,11 +140,51 @@ public class ExpandableListAdapterCourseBin extends BaseExpandableListAdapter {
             TextView viewSectionType = (TextView) convertView.findViewById(R.id.textViewBinSectionType);
             TextView viewSectionSchedule = (TextView) convertView.findViewById(R.id.textViewBinSectionSchedule);
 
-            String sectionType = section.getType() + " " + section.getInstructor();
-            String sectionSchedule = section.getDay() + " " + section.getBeginTime() + " - " + section.getEndTime();
 
-            viewSectionType.setText(sectionType);
-            viewSectionSchedule.setText(sectionSchedule);
+        String sectionType = section.getType().substring(0,3);
+        String lecturerName = section.getInstructor();
+
+        String names[] = lecturerName.split(" ");
+        String sectionInfo = sectionType + " - " + names[1];
+
+        DateFormat dfdefault = new SimpleDateFormat("hh:mm:ss");
+        DateFormat df = new SimpleDateFormat("K:mma");
+
+        String sectionSchedule = "";
+        try {
+            Date startObj = dfdefault.parse(section.getBeginTime());
+            Date endObj = dfdefault.parse(section.getEndTime());
+
+            String beginTime = df.format(startObj);
+            String endTime = df.format(endObj);
+
+            sectionSchedule = section.getDay() + " " + beginTime + " " + endTime;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        log("info is " + sectionInfo + "schedule is " + sectionSchedule);
+        viewSectionType.setText(sectionInfo);
+        viewSectionSchedule.setText(sectionSchedule);
+
+
+        Drawable drawable = null;
+
+        if(0 == childPosition%2)
+        {
+            drawable = mContext.getResources().getDrawable(R.color.lightergrey);
+        }
+        else
+        {
+            drawable = mContext.getResources().getDrawable(R.color.lightgrey);
+        }
+
+        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            convertView.setBackgroundDrawable(drawable);
+        } else {
+            convertView.setBackground(drawable);
+        }
 
         return convertView;
     }

@@ -174,6 +174,23 @@ public class ExpandableListAdapterSchool extends BaseExpandableListAdapter {
             TextView viewDeptCodeChild = (TextView) convertView.findViewById(R.id.textViewDeptCode);
             viewDeptCodeChild.setText(department.getmCode());
 
+        Drawable drawable = null;
+
+        if(0 == childPosition%2)
+        {
+        drawable = mContext.getResources().getDrawable(R.color.lightergrey);
+        }
+        else
+        {
+        drawable = mContext.getResources().getDrawable(R.color.lightgrey);
+        }
+
+        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            convertView.setBackgroundDrawable(drawable);
+        } else {
+            convertView.setBackground(drawable);
+        }
+
         return convertView;
     }
 
