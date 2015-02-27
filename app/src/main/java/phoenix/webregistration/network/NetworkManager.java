@@ -1,5 +1,14 @@
 package phoenix.webregistration.network;
 
+import android.util.Log;
+
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.model.GraphUser;
+import com.parse.Parse;
+import com.parse.ParseFacebookUtils;
+import com.parse.ParseUser;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,6 +16,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,6 +26,8 @@ import org.json.JSONObject;
  * Created by Nikhil on 2/13/2015.
  */
 public class NetworkManager {
+    public static List<GraphUser> FriendsList;
+
     /*
      * Creates a string from a reader.
      */
@@ -74,5 +86,29 @@ public class NetworkManager {
         NetworkJsonObjectSyncTask task = new NetworkJsonObjectSyncTask();
         task.setListener(listener);
         task.execute(url);
+    }
+
+    /**
+     * This grabs all friends of the current user
+     */
+    public static void makeMyFacebookFriendsRequest() {
+        //ParseFacebookUtils.get
+        if(ParseFacebookUtils.isLinked(ParseUser.getCurrentUser()))
+            Log.d("Facebook", "Current user is linked");
+        Log.d("Facebook", "Friends size: " + ParseFacebookUtils.getSession());
+        Request friendListRequest = Request.newMyFriendsRequest(ParseFacebookUtils.getSession(),
+                new Request.GraphUserListCallback() {
+                    @Override
+                    public void onCompleted(List<GraphUser> users, Response response) {
+                        if (users != null) {
+                            FriendsList = users;
+                            Log.d("Facebook", "Friends size: " + FriendsList.size());
+                            for(int i = 0; i < FriendsList.size(); i++){
+                                Log.d("Facebook", "Friend: " + FriendsList.get(i).getFirstName());
+                            }
+                        }
+                    }
+                });
+        friendListRequest.executeAsync();
     }
 }

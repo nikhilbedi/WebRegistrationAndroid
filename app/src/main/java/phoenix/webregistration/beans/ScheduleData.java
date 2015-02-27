@@ -2,11 +2,8 @@ package phoenix.webregistration.beans;
 
 import android.util.Log;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Random;
 
-import phoenix.webregistration.RegisteredSection;
 import phoenix.webregistration.network.USCApiHelper;
 
 /**

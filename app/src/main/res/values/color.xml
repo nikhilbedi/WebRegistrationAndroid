@@ -22,7 +22,7 @@
 	<color name = "yellow3">#FFE600</color>
 	<color name = "yellow1">#FFFFAA</color>
 	<color name = "snow">#FFFAFA</color>
-	<color name = "gold">#FFAA00</color>
+	<color name = "gold">#ffffd700</color>
 	<color name = "mustard">#FFCC11</color>
 	<color name = "goldenrod">#FFC125</color>
 </resources>

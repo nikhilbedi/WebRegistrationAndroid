@@ -1,4 +1,4 @@
-package phoenix.webregistration;
+package phoenix.webregistration.beans;
 
 import java.util.ArrayList;
 

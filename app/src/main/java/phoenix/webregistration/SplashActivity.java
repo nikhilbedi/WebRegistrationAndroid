@@ -1,5 +1,10 @@
 package phoenix.webregistration;
 
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.android.Facebook;
+import com.facebook.model.GraphUser;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
@@ -16,6 +21,7 @@ import android.util.Log;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 /**
  * This class will be used to load additional data on
@@ -97,4 +103,6 @@ public class SplashActivity extends Activity
 
         }
     }
+
+
 }

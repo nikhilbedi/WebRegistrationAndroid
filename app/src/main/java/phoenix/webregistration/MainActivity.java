@@ -10,10 +10,25 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.model.GraphUser;
+import com.parse.FunctionCallback;
+import com.parse.ParseCloud;
+import com.parse.ParseException;
+import com.parse.ParseFacebookUtils;
+import com.parse.ParseUser;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.List;
+
 import phoenix.webregistration.fragments.FragmentTabBin;
 import phoenix.webregistration.fragments.FragmentTabSchool;
 import phoenix.webregistration.fragments.FragmentTabSchedule;
 import phoenix.webregistration.controller.SupportFragTabListener;
+import phoenix.webregistration.network.NetworkManager;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -24,16 +39,16 @@ public class MainActivity extends ActionBarActivity {
     private Fragment fragmentTabSchedule;
     private final String LOG_TAG = "MainActivity";
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         log("onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        NetworkManager.makeMyFacebookFriendsRequest();
         setupFragments();
         setupTabs();
     }
+
 
     private void setupFragments() {
         log("setupFragments");

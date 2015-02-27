@@ -17,8 +17,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import phoenix.webregistration.R;
-import phoenix.webregistration.RegisteredSection;
-import phoenix.webregistration.beans.CourseBinData;
+import phoenix.webregistration.beans.RegisteredSection;
 import phoenix.webregistration.beans.ScheduleData;
 import phoenix.webregistration.beans.Section;
 
@@ -91,10 +90,11 @@ public class FragmentTabSchedule extends Fragment {
                 RelativeLayout.LayoutParams.FILL_PARENT, height);
         Button button = new Button(getActivity().getApplicationContext());
         button.setLayoutParams(params);
-        button.setBackgroundColor(getResources().getColor(R.color.brickred));
+        button.setBackgroundColor(getResources().getColor(R.color.gold));
         button.setText(buttonText);
         button.setOnClickListener(RegisteredSectionListener);
         button.setTextSize(9);
+        button.setTextColor(getResources().getColor(R.color.black));
         params.setMargins(0, marginTop, 0, 0);
 
         return button;
@@ -260,7 +260,6 @@ public class LoadViewsInToWeekView extends AsyncTask<String, Void, String> {
             try {
                 RegisteredSection scheduledCourse;
                 int length = registeredSections.size();
-
 
                 if (length != 0) {
                     initializeCalendarViews();
