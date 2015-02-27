@@ -19,6 +19,8 @@ import java.util.List;
 
 import phoenix.webregistration.R;
 import phoenix.webregistration.beans.Course;
+import phoenix.webregistration.beans.CourseBinData;
+import phoenix.webregistration.beans.ScheduleData;
 import phoenix.webregistration.beans.Section;
 
 /**
@@ -129,7 +131,7 @@ public class ExpandableListAdapterClasses extends BaseExpandableListAdapter {
 
     log("getChildView");
 
-            Section section = (Section) getChild(groupPosition, childPosition);
+            final Section section = (Section) getChild(groupPosition, childPosition);
             if (convertView == null) {
                 LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = inflater.inflate(R.layout.child_section, null);
@@ -189,7 +191,7 @@ public class ExpandableListAdapterClasses extends BaseExpandableListAdapter {
         viewAddClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO @Nikhil add code here
+                ScheduleData.addSection(section);
             }
         });
 

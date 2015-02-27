@@ -82,12 +82,10 @@ public class MainActivity extends ActionBarActivity {
        // tabCourseBin.setIcon(R.drawable.tabiconcoursebin);
        // tabSchedule.setIcon(R.drawable.tabiconschedule);
 
-
         // Add tabs to actionbar
         actionBar.addTab(tabClasses);
         actionBar.addTab(tabCourseBin);
-        actionBar.addTab(tabSchedule);
-
+        actionBar.addTab(tabSchedule, true);
     }
 
 

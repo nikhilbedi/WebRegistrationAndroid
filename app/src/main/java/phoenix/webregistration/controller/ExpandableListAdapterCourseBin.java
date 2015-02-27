@@ -17,8 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import phoenix.webregistration.R;
-import phoenix.webregistration.beans.Classes;
-import phoenix.webregistration.beans.Department;
+import phoenix.webregistration.beans.Course;
+
 import phoenix.webregistration.beans.Section;
 
 /**
@@ -30,13 +30,13 @@ public class ExpandableListAdapterCourseBin extends BaseExpandableListAdapter {
     private Context mContext;
     private Class mClass;
 
-    private List<Classes> mClassListHeader;
-    private HashMap<Classes, List<Section>> mClassListChild;
+    private List<Course> mClassListHeader;
+    private HashMap<Course, List<Section>> mClassListChild;
 
     private final String LOG_TAG = "ExpandableListAdapter";
 
     private int sdk = android.os.Build.VERSION.SDK_INT;
-    public ExpandableListAdapterCourseBin(Context context, List<Classes> classListHeader, HashMap<Classes, List<Section>> classListChild)
+    public ExpandableListAdapterCourseBin(Context context, List<Course> classListHeader, HashMap<Course, List<Section>> classListChild)
     {
         mContext = context;
         mClassListHeader = classListHeader;
@@ -91,7 +91,7 @@ public class ExpandableListAdapterCourseBin extends BaseExpandableListAdapter {
         log("getGroupView");
 
 
-            Classes classObj = (Classes) getGroup(groupPosition);
+        Course classObj = (Course) getGroup(groupPosition);
             if (convertView == null) {
                 LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = inflater.inflate(R.layout.header_class_coursebin, null);
