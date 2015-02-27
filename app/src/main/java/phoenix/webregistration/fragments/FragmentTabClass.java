@@ -22,6 +22,7 @@ import phoenix.webregistration.beans.Classes;
 import phoenix.webregistration.beans.Section;
 import phoenix.webregistration.controller.ExpandableListAdapterClasses;
 import phoenix.webregistration.R;
+import phoenix.webregistration.controller.ExpandableListAdapterClasses;
 import phoenix.webregistration.network.NetworkListener;
 import phoenix.webregistration.network.NetworkManager;
 import phoenix.webregistration.network.USCApiHelper;
@@ -108,7 +109,7 @@ public class FragmentTabClass extends Fragment {
 
                 if(groupPosition != lastExpandedGroupPosition)
                 {
-                   expandableListView.collapseGroup(lastExpandedGroupPosition);
+                   // expandableListView.collapseGroup(lastExpandedGroupPosition);
                 }
                 lastExpandedGroupPosition = groupPosition;
 
@@ -118,7 +119,7 @@ public class FragmentTabClass extends Fragment {
         expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
             @Override
             public void onGroupCollapse(int groupPosition) {
-                //expandableListView.collapseGroup(groupPosition);
+              //mListChild.get(mListHeader.get(groupPosition))  expandableListView.collapseGroup(groupPosition);
             }
         });
 

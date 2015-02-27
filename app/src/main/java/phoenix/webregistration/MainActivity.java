@@ -69,6 +69,11 @@ public class MainActivity extends ActionBarActivity {
         ActionBar.Tab tabCourseBin = actionBar.newTab().setCustomView(R.layout.customtab_coursebin).setTabListener(new SupportFragTabListener<FragmentTabBin>(fragmentTabBin));
         ActionBar.Tab tabSchedule= actionBar.newTab().setCustomView(R.layout.customtab_schedule).setTabListener(new SupportFragTabListener<FragmentTabSchedule>(fragmentTabSchedule));
 
+       // tabClasses.setIcon(R.drawable.tabiconclasses);
+       // tabCourseBin.setIcon(R.drawable.tabiconcoursebin);
+       // tabSchedule.setIcon(R.drawable.tabiconschedule);
+
+
         // Add tabs to actionbar
         actionBar.addTab(tabClasses);
         actionBar.addTab(tabCourseBin);
