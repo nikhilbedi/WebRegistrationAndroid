@@ -240,6 +240,10 @@ public class LoadViewsInToWeekView extends AsyncTask<String, Void, String> {
                 // Test adding courses
                 Section s = new Section();
                 s.setTitle("CSCI-101");
+                s.setBeginTime("19:00");
+                s.setEndTime("20:50");
+                s.setDay("H");
+                s.setLocation("SAL126");
                 ScheduleData.addSection(s);
 
                 registeredSections = ScheduleData.getSections();
@@ -262,75 +266,77 @@ public class LoadViewsInToWeekView extends AsyncTask<String, Void, String> {
                     initializeCalendarViews();
                     for (int k = 0; k < registeredSections.size(); k++) {
                             scheduledCourse = registeredSections.get(k);
-                            int day = scheduledCourse.day;
-                            switch (day) {
-                                case 0:
-                                    int sunday = 100;
-                                    relativeLayoutSunday
-                                            .addView(getButtonToLayout(
-                                                    getHeightOfButton(scheduledCourse.tapMargin,scheduledCourse.buttonHeight),
-                                                    getTapMargin(scheduledCourse.tapMargin),
-                                                    scheduledCourse.section.getTitle()));
-                                    sunday++;
-                                    break;
+                            for(int i = 0; i < scheduledCourse.days.size(); i++) {
+                                int day = scheduledCourse.days.get(i);
+                                switch (day) {
+                                    case 0:
+                                        int sunday = 100;
+                                        relativeLayoutSunday
+                                                .addView(getButtonToLayout(
+                                                        getHeightOfButton(scheduledCourse.tapMargin, scheduledCourse.buttonHeight),
+                                                        getTapMargin(scheduledCourse.tapMargin),
+                                                        scheduledCourse.section.getTitle()));
+                                        sunday++;
+                                        break;
 
-                                case 1:
-                                    int MonDay = 200;
-                                    relativeLayoutMonDay
-                                            .addView(getButtonToLayout(
-                                                    getHeightOfButton(scheduledCourse.tapMargin, scheduledCourse.buttonHeight),
-                                                    getTapMargin(scheduledCourse.tapMargin),
-                                                    scheduledCourse.section.getTitle()));
-                                    MonDay++;
-                                    break;
-                                case 2:
-                                    int TueDay = 200;
-                                    relativeLayoutTueDay
-                                            .addView(getButtonToLayout(
-                                                    getHeightOfButton(scheduledCourse.tapMargin, scheduledCourse.buttonHeight),
-                                                    getTapMargin(scheduledCourse.tapMargin),
-                                                    scheduledCourse.section.getTitle()));
-                                    TueDay++;
-                                    break;
-                                case 3:
-                                    int WedDay = 200;
-                                    relativeLayoutWedDay
-                                            .addView(getButtonToLayout(
-                                                    getHeightOfButton(scheduledCourse.tapMargin, scheduledCourse.buttonHeight),
-                                                    getTapMargin(scheduledCourse.tapMargin),
-                                                    scheduledCourse.section.getTitle()));
-                                    WedDay++;
-                                    break;
-                                case 4:
-                                    int ThuDay = 200;
-                                    relativeLayoutThuDay
-                                            .addView(getButtonToLayout(
-                                                    getHeightOfButton(scheduledCourse.tapMargin, scheduledCourse.buttonHeight),
-                                                    getTapMargin(scheduledCourse.tapMargin),
-                                                    scheduledCourse.section.getTitle()));
-                                    ThuDay++;
-                                    break;
-                                case 5:
-                                    int FriDay = 200;
-                                    relativeLayoutFriDay
-                                            .addView(getButtonToLayout(
-                                                    getHeightOfButton(scheduledCourse.tapMargin, scheduledCourse.buttonHeight),
-                                                    getTapMargin(scheduledCourse.tapMargin),
-                                                    scheduledCourse.section.getTitle()));
-                                    FriDay++;
-                                    break;
-                                case 6:
-                                    int SatDay = 200;
-                                    relativeLayoutSatDay
-                                            .addView(getButtonToLayout(
-                                                    getHeightOfButton(scheduledCourse.tapMargin, scheduledCourse.buttonHeight),
-                                                    getTapMargin(scheduledCourse.tapMargin),
-                                                    scheduledCourse.section.getTitle()));
-                                    SatDay++;
-                                    break;
+                                    case 1:
+                                        int MonDay = 200;
+                                        relativeLayoutMonDay
+                                                .addView(getButtonToLayout(
+                                                        getHeightOfButton(scheduledCourse.tapMargin, scheduledCourse.buttonHeight),
+                                                        getTapMargin(scheduledCourse.tapMargin),
+                                                        scheduledCourse.section.getTitle()));
+                                        MonDay++;
+                                        break;
+                                    case 2:
+                                        int TueDay = 200;
+                                        relativeLayoutTueDay
+                                                .addView(getButtonToLayout(
+                                                        getHeightOfButton(scheduledCourse.tapMargin, scheduledCourse.buttonHeight),
+                                                        getTapMargin(scheduledCourse.tapMargin),
+                                                        scheduledCourse.section.getTitle()));
+                                        TueDay++;
+                                        break;
+                                    case 3:
+                                        int WedDay = 200;
+                                        relativeLayoutWedDay
+                                                .addView(getButtonToLayout(
+                                                        getHeightOfButton(scheduledCourse.tapMargin, scheduledCourse.buttonHeight),
+                                                        getTapMargin(scheduledCourse.tapMargin),
+                                                        scheduledCourse.section.getTitle()));
+                                        WedDay++;
+                                        break;
+                                    case 4:
+                                        int ThuDay = 200;
+                                        relativeLayoutThuDay
+                                                .addView(getButtonToLayout(
+                                                        getHeightOfButton(scheduledCourse.tapMargin, scheduledCourse.buttonHeight),
+                                                        getTapMargin(scheduledCourse.tapMargin),
+                                                        scheduledCourse.section.getTitle()));
+                                        ThuDay++;
+                                        break;
+                                    case 5:
+                                        int FriDay = 200;
+                                        relativeLayoutFriDay
+                                                .addView(getButtonToLayout(
+                                                        getHeightOfButton(scheduledCourse.tapMargin, scheduledCourse.buttonHeight),
+                                                        getTapMargin(scheduledCourse.tapMargin),
+                                                        scheduledCourse.section.getTitle()));
+                                        FriDay++;
+                                        break;
+                                    case 6:
+                                        int SatDay = 200;
+                                        relativeLayoutSatDay
+                                                .addView(getButtonToLayout(
+                                                        getHeightOfButton(scheduledCourse.tapMargin, scheduledCourse.buttonHeight),
+                                                        getTapMargin(scheduledCourse.tapMargin),
+                                                        scheduledCourse.section.getTitle()));
+                                        SatDay++;
+                                        break;
 
-                                default:
-                                    break;
+                                    default:
+                                        break;
+                                }
                             }
                         }
                     }

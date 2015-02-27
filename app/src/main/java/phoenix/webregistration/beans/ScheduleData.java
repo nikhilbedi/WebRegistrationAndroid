@@ -1,10 +1,13 @@
 package phoenix.webregistration.beans;
 
+import android.util.Log;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
 import phoenix.webregistration.RegisteredSection;
+import phoenix.webregistration.network.USCApiHelper;
 
 /**
  * Created by Nikhil on 2/26/2015.
@@ -16,24 +19,20 @@ public class ScheduleData {
         RegisteredSection rs = new RegisteredSection();
         rs.section = s;
 
-        // random for now
-        Random rand = new Random();
-        int max = 6; int min = 0;
-        rs.day = rand.nextInt((max - min) + 1) + min;
-        max = 23; min = 0;
-        rs.tapMargin = rand.nextInt((max - min) + 1) + min;
-        min = rs.tapMargin;
-        rs.buttonHeight = rand.nextInt((max - min) + 1) + min;
+        // determine day, topMargin (begin time), and buttonheight (duration)
+        rs.days = USCApiHelper.parseDaysFromLetterCodes(s.getDay());
+        int beginTime = USCApiHelper.parseTime(s.getBeginTime());
+        int endTime = USCApiHelper.parseTime(s.getEndTime());
+        rs.tapMargin = beginTime;
+        rs.buttonHeight = endTime - beginTime;
+        Log.d("RegisteredSection", "days: " + rs.days.get(0) + " beginTime: " + beginTime + " endTime: " + endTime);
 
-        // TODO determine day, topMargin (begin time), and buttonheight (duration)
-        rs.day = 0;
-        rs.tapMargin = 8;
-        rs.buttonHeight = 4;
-
-        sections.add(rs); // TODO
+        sections.add(rs);
     }
 
     public static ArrayList<RegisteredSection> getSections(){
         return sections;
     }
+
+
 }
