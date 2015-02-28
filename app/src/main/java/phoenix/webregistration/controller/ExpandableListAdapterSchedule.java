@@ -7,9 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -20,15 +18,12 @@ import java.util.List;
 
 import phoenix.webregistration.R;
 import phoenix.webregistration.beans.Course;
-
-import phoenix.webregistration.beans.CourseBinData;
-import phoenix.webregistration.beans.ScheduleData;
 import phoenix.webregistration.beans.Section;
 
 /**
  * Created by zion on 2/21/2015.
  */
-public class ExpandableListAdapterCourseBin extends BaseExpandableListAdapter {
+public class ExpandableListAdapterSchedule extends BaseExpandableListAdapter {
 
 
     private Context mContext;
@@ -40,7 +35,7 @@ public class ExpandableListAdapterCourseBin extends BaseExpandableListAdapter {
     private final String LOG_TAG = "ExpandableListAdapter";
 
     private int sdk = android.os.Build.VERSION.SDK_INT;
-    public ExpandableListAdapterCourseBin(Context context, List<Course> classListHeader, HashMap<Course, List<Section>> classListChild)
+    public ExpandableListAdapterSchedule(Context context, List<Course> classListHeader, HashMap<Course, List<Section>> classListChild)
     {
         mContext = context;
         mClassListHeader = classListHeader;
@@ -98,11 +93,11 @@ public class ExpandableListAdapterCourseBin extends BaseExpandableListAdapter {
         Course classObj = (Course) getGroup(groupPosition);
             if (convertView == null) {
                 LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = inflater.inflate(R.layout.header_class_coursebin, null);
+                convertView = inflater.inflate(R.layout.header_class_schedule, null);
             }
-            TextView viewClassID = (TextView) convertView.findViewById(R.id.textViewBinCourseID);
-            TextView viewClassCredits = (TextView) convertView.findViewById(R.id.textViewBinCourseCredit);
-            TextView viewClassTitle = (TextView) convertView.findViewById(R.id.textViewBinCourseTitle);
+            TextView viewClassID = (TextView) convertView.findViewById(R.id.textViewScheduleCourseID);
+            TextView viewClassCredits = (TextView) convertView.findViewById(R.id.textViewScheduleCourseCredit);
+            TextView viewClassTitle = (TextView) convertView.findViewById(R.id.textViewScheduleCourseTitle);
 
             viewClassID.setText(classObj.getmID());
             viewClassCredits.setText(classObj.getmCredits());
@@ -134,18 +129,16 @@ public class ExpandableListAdapterCourseBin extends BaseExpandableListAdapter {
 
     log("getChildView");
 
-        final Section section = (Section) getChild(groupPosition, childPosition);
-        final Course course = (Course)getGroup(groupPosition);
-
-        if (convertView == null) {
+            Section section = (Section) getChild(groupPosition, childPosition);
+            if (convertView == null) {
                 LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = inflater.inflate(R.layout.child_section_coursebin, null);
+                convertView = inflater.inflate(R.layout.child_section_schedule, null);
 
             }
 
-            TextView viewSectionType = (TextView) convertView.findViewById(R.id.textViewBinSectionType);
-            TextView viewSectionSchedule = (TextView) convertView.findViewById(R.id.textViewBinSectionSchedule);
-        ImageView viewAddClass = (ImageView) convertView.findViewById(R.id.imageViewBinAddSection);
+            TextView viewSectionType = (TextView) convertView.findViewById(R.id.textViewScheduleSectionType);
+            TextView viewSectionSchedule = (TextView) convertView.findViewById(R.id.textViewScheduleSectionSchedule);
+
 
         String sectionType = section.getType().substring(0,3);
         String lecturerName = section.getInstructor();
@@ -192,14 +185,6 @@ public class ExpandableListAdapterCourseBin extends BaseExpandableListAdapter {
             convertView.setBackground(drawable);
         }
 
-        // listener for click to add
-        viewAddClass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ScheduleData.addCourseAndSection(course, section);
-                Toast.makeText(mContext, "add class ", Toast.LENGTH_LONG).show();
-            }
-        });
 
 
         return convertView;

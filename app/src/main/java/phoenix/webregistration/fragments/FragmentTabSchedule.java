@@ -11,15 +11,19 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ExpandableListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import phoenix.webregistration.R;
+import phoenix.webregistration.beans.CourseBinData;
 import phoenix.webregistration.beans.RegisteredSection;
 import phoenix.webregistration.beans.ScheduleData;
 import phoenix.webregistration.beans.Section;
+import phoenix.webregistration.controller.ExpandableListAdapterCourseBin;
+import phoenix.webregistration.controller.ExpandableListAdapterSchedule;
 
 /**
  * Created by zion on 2/15/2015.
@@ -35,6 +39,13 @@ public class FragmentTabSchedule extends Fragment {
     private RelativeLayout relativeLayoutThuDay;
     private RelativeLayout relativeLayoutFriDay;
     private RelativeLayout relativeLayoutSatDay;
+
+    private ExpandableListAdapterSchedule expandableListAdapter;
+    private ExpandableListView expandableListView;
+    private int lastExpandedGroupPosition = 0;
+
+    private final String LOG_TAG = "FragmentTabSchedule";
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,10 +70,57 @@ public class FragmentTabSchedule extends Fragment {
              * Portrait mode of the device
              */
             rootView = inflater.inflate(R.layout.fragmentschedule, null);
+            expandableListView = (ExpandableListView) rootView.findViewById(R.id.listviewSchedule);
+            expandableListAdapter = new ExpandableListAdapterSchedule(getActivity(), ScheduleData.getCourses(), ScheduleData.getSectionsP());
+            expandableListView.setAdapter(expandableListAdapter);
+
+            setListeners();
+            expandableListAdapter.notifyDataSetChanged();
         }
 
         return rootView;
     }
+
+    private void setListeners() {
+
+
+        expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                Toast.makeText(getActivity(), "Group Clicked", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+
+        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                return false;
+            }
+        });
+
+        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+
+                if(groupPosition != lastExpandedGroupPosition)
+                {
+                    expandableListView.collapseGroup(lastExpandedGroupPosition);
+                }
+                lastExpandedGroupPosition = groupPosition;
+
+            }
+        });
+
+        expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+            @Override
+            public void onGroupCollapse(int groupPosition) {
+                //expandableListView.collapseGroup(groupPosition);
+            }
+        });
+
+    }
+
 
     private void initializeCalendarViews(){
         relativeLayoutSunday = (RelativeLayout) getActivity().findViewById(R.id.relativeLayoutSunday);

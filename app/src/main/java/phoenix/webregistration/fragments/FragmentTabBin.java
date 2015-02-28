@@ -15,10 +15,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import phoenix.webregistration.beans.Course;
+import phoenix.webregistration.beans.CourseBinData;
 import phoenix.webregistration.beans.Section;
 import phoenix.webregistration.controller.ExpandableListAdapterCourseBin;
 import phoenix.webregistration.R;
@@ -58,14 +62,15 @@ public class FragmentTabBin extends Fragment {
 
         log("DC is = " + departmentCode);
 
-        listHeaderData = new ArrayList<Course>();
+  //      listHeaderData = new ArrayList<Course>();
         listChildData = new HashMap<Course, List<Section>>();
         expandableListView = (ExpandableListView) rootView.findViewById(R.id.listviewCourseBin);
-        expandableListAdapter = new ExpandableListAdapterCourseBin(getActivity(),listHeaderData, listChildData);
+        expandableListAdapter = new ExpandableListAdapterCourseBin(getActivity(),CourseBinData.getCourses(), CourseBinData.getSections());
         expandableListView.setAdapter(expandableListAdapter);
 
+
         // change below
-        NetworkManager.requestData(USCApiHelper.buildCoursesURL(term, departmentCode), new NetworkListener() {
+        /*NetworkManager.requestData(USCApiHelper.buildCoursesURL(term, departmentCode), new NetworkListener() {
             @Override
             public void onDataArrival(JSONArray jsonArray) {
                 log("NetworkManager");
@@ -73,16 +78,44 @@ public class FragmentTabBin extends Fragment {
                 // expandableListAdapter.notifyDataSetChanged();
             }
 
+
             @Override
             public void onDataObjectArrival(JSONObject jsonObject) {
                 // do nothing
             }
         });
 
-
+*/
+       // setClassAndSectionData();
         setListeners();
+        expandableListAdapter.notifyDataSetChanged();
 
         return rootView;
+    }
+
+
+
+    private void setClassAndSectionData()
+    {
+
+        listHeaderData = new ArrayList<Course>(CourseBinData.getCourses());
+        listChildData.putAll(CourseBinData.getSections());
+
+        Iterator<Course> i = listHeaderData.iterator();
+        while(i.hasNext())
+        {
+            log("Course is " + i.next().toString());
+        }
+
+        Iterator it = listChildData.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            log("Map is" + pair.getKey() + " = " + pair.getValue());
+        }
+
+            expandableListAdapter.notifyDataSetChanged();
+       // listHeaderData = CourseBinData.getCourses();
+       // listChildData = CourseBinData.getSections();
     }
 
     private void setListeners() {

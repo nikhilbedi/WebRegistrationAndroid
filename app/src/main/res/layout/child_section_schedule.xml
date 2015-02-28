@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
-        android:id="@+id/textViewBinSectionType"
+        android:id="@+id/textViewScheduleSectionType"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -17,26 +17,15 @@
         android:layout_marginTop="12dp"
         android:textColor="@color/lightblack" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageViewBinAddSection"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="false"
-        android:src = "@drawable/plusimage"
-        android:layout_marginTop="18dp"
-        android:layout_marginRight="20dp"
-        android:minHeight="40dp"
-        android:minWidth="40dp" />
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
-        android:id="@+id/textViewBinSectionSchedule"
-        android:layout_below="@+id/textViewBinSectionType"
+        android:id="@+id/textViewScheduleSectionSchedule"
+        android:layout_below="@+id/textViewScheduleSectionType"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="2dp"
