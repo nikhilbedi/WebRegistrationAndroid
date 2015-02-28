@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -132,6 +133,7 @@ public class ExpandableListAdapterClasses extends BaseExpandableListAdapter {
     log("getChildView");
 
             final Section section = (Section) getChild(groupPosition, childPosition);
+            final Course course = (Course)getGroup(groupPosition);
             if (convertView == null) {
                 LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = inflater.inflate(R.layout.child_section, null);
@@ -146,9 +148,9 @@ public class ExpandableListAdapterClasses extends BaseExpandableListAdapter {
             String lecturerName = section.getInstructor();
 
             String names[] = lecturerName.split(" ");
-            String sectionInfo = sectionType + " - " + names[1];
+            String sectionInfo = sectionType + " - " + names[(names.length-1)];
 
-            DateFormat dfdefault = new SimpleDateFormat("hh:mm");
+            DateFormat dfdefault = new SimpleDateFormat("h:mm");
             DateFormat df = new SimpleDateFormat("K:mma");
 
             String sectionSchedule = "";
@@ -191,7 +193,8 @@ public class ExpandableListAdapterClasses extends BaseExpandableListAdapter {
         viewAddClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ScheduleData.addSection(section);
+                CourseBinData.addCourseAndSection(course, section);
+                Toast.makeText(mContext, "add class ", Toast.LENGTH_LONG).show();
             }
         });
 

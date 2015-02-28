@@ -8,6 +8,8 @@ package phoenix.webregistration.beans;
 
 public class Section {
 
+    private Course course;
+
     private String ID;
     private String title;
     private String session;
