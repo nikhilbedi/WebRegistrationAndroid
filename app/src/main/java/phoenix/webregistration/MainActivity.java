@@ -2,6 +2,8 @@ package phoenix.webregistration;
 
 
 
+import android.content.Intent;
+import android.media.audiofx.BassBoost;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -105,10 +107,15 @@ public class MainActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            launchSettingsActivity();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void launchSettingsActivity(){
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 
     public void log(String msg)

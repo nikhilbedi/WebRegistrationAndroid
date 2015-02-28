@@ -4,6 +4,8 @@
 
  import java.util.ArrayList;
 
+ import phoenix.webregistration.beans.Term;
+
  /**
  * Created by Nikhil on 2/14/2015.
  * A helper class used to build urls for queries.
@@ -16,6 +18,8 @@ public class USCApiHelper {
     // This url requires additional parameters to obtain any data
     private static final String COURSES_URL ="http://petri.esd.usc.edu/socAPI/Courses/";
 
+    private static Term defaultTerm = new Term("20151", "Spring 2015", "2015-01-09T00:00:00");
+
     // have yet to verify if this url will return data
     public static String buildDepartmentsURL(String schoolCode){
         return SCHOOLS_URL + schoolCode;
@@ -23,12 +27,12 @@ public class USCApiHelper {
 
     // have yet to verify if this url will return data
     public static String buildCoursesURL(String term, String departmentCode){
-        return COURSES_URL + term + "/" + departmentCode;
+        return COURSES_URL + defaultTerm.getCode() + "/" + departmentCode;
     }
 
     // have yet to verify if this url will return data
     public static String buildSectionsURL(String term, String courseId){
-        return COURSES_URL + term + "/" + courseId;
+        return COURSES_URL + defaultTerm.getCode() + "/" + courseId;
     }
 
     // Verified to work
@@ -40,6 +44,10 @@ public class USCApiHelper {
     public static String getSchoolsUrl() {
         return SCHOOLS_URL;
     }
+
+     public static void setDefaultTerm(Term defaultTerm) {
+         USCApiHelper.defaultTerm = defaultTerm;
+     }
 
     /*
      * Sunday represents 0, Saturday represents 6
